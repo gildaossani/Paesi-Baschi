@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norte Salvaje — Paesi Baschi 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0a2540;
+    --ocean-mid: #1a3a5c;
+    --ocean-light: #2d5a8e;
+    --gold: #d4913a;
+    --gold-light: #f0c070;
+    --sand: #f5f0e8;
+    --cream: #fafaf5;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --success: #2d6a4f;
+    --warning: #b45309;
+    --nav-h: 64px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: var(--ocean);
+    display: flex; align-items: center;
+    padding: 0 1.5rem;
+    gap: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    white-space: nowrap;
+    margin-right: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+  .nav-sep { width: 1px; height: 24px; background: rgba(255,255,255,0.15); margin: 0 0.5rem; }
+  .nav-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.65);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 0.4rem 0.75rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .nav-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .nav-btn.active { color: var(--gold-light); background: rgba(212,145,58,0.2); }
+
+  /* PAGES */
+  main { padding-top: var(--nav-h); }
+  .page { display: none; animation: fadeIn 0.3s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--ocean) 0%, #0d1f3c 50%, #1a0a0a 100%);
+    color: white;
+    padding: 3.5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 420px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(212,145,58,0.08) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(45,90,142,0.2) 0%, transparent 50%),
+                      radial-gradient(circle at 60% 80%, rgba(10,37,64,0.4) 0%, transparent 40%);
+  }
+  .hero-tag {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.75rem;
+    position: relative;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 700; line-height: 0.95;
+    margin-bottom: 0.5rem; position: relative;
+  }
+  .hero-title em { color: var(--gold-light); font-style: italic; }
+  .hero-sub {
+    font-size: 0.95rem; color: rgba(255,255,255,0.65);
+    font-weight: 300; margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic;
+    color: var(--gold-light); line-height: 1.5;
+    border-left: 3px solid var(--gold);
+    padding-left: 1rem; max-width: 500px;
+    position: relative;
+  }
+  .hero-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; position: relative; }
+  .hero-chip {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2rem; padding: 0.3rem 0.85rem;
+    font-size: 0.75rem; color: rgba(255,255,255,0.8);
+  }
+  .hero-dates {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(212,145,58,0.2); border: 1px solid rgba(212,145,58,0.4);
+    border-radius: 2rem; padding: 0.45rem 1.1rem;
+    font-size: 0.8rem; color: var(--gold-light); font-weight: 500;
+    margin-top: 1rem; position: relative;
+  }
+
+  /* SECTION */
+  .sec { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  .sec-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.3rem; }
+  .sec-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--ocean); margin-bottom: 1.25rem; line-height: 1.2; }
+  .sec-text { font-size: 0.92rem; line-height: 1.8; color: #3a3a4a; }
+
+  /* CARD GRID */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.875rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.875rem; }
+
+  .card {
+    background: white; border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 1rem; padding: 1.25rem;
+    font-size: 0.87rem; line-height: 1.65; color: #3a3a4a;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-weight: 700; color: var(--ocean);
+    margin-bottom: 0.4rem;
+  }
+
+  /* INFOBOX */
+  .infobox {
+    background: var(--ocean); color: white;
+    border-radius: 1rem; padding: 1.25rem 1.5rem;
+    font-size: 0.88rem; line-height: 1.7;
+    margin: 1rem 0;
+  }
+  .infobox strong { color: var(--gold-light); }
+  .infobox a { color: var(--gold-light); }
+
+  .alert {
+    border-left: 4px solid var(--gold);
+    background: #fffbf0;
+    border-radius: 0 0.75rem 0.75rem 0;
+    padding: 0.85rem 1.1rem;
+    font-size: 0.85rem; line-height: 1.6; color: #5a3a00;
+    margin: 0.75rem 0;
+  }
+  .alert strong { color: #3a2000; }
+
+  .success-box {
+    border-left: 4px solid var(--success);
+    background: #f0f8f4;
+    border-radius: 0 0.75rem 0.75rem 0;
+    padding: 0.85rem 1.1rem;
+    font-size: 0.85rem; line-height: 1.6; color: #1a4a2e;
+    margin: 0.75rem 0;
+  }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th { background: var(--ocean); color: white; padding: 0.65rem 0.9rem; text-align: left; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.3px; }
+  th:first-child { border-radius: 0.5rem 0 0 0; }
+  th:last-child { border-radius: 0 0.5rem 0 0; }
+  td { padding: 0.65rem 0.9rem; border-bottom: 1px solid rgba(0,0,0,0.05); color: #3a3a4a; vertical-align: top; line-height: 1.5; }
+  tr:nth-child(even) td { background: rgba(10,37,64,0.025); }
+  tr:last-child td { border-bottom: none; }
+
+  /* DIVIDER */
+  .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; margin: 0; }
+
+  /* DAY CARDS */
+  .day-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .day-pill {
+    background: white; border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 2rem; padding: 0.4rem 0.9rem;
+    font-size: 0.78rem; cursor: pointer; transition: all 0.2s;
+    font-weight: 500; color: var(--muted);
+  }
+  .day-pill:hover { border-color: var(--ocean); color: var(--ocean); }
+  .day-pill.active { background: var(--ocean); border-color: var(--ocean); color: white; }
+  .day-pill.birthday { border-color: var(--gold); color: var(--warning); }
+  .day-pill.birthday.active { background: var(--gold); border-color: var(--gold); color: white; }
+
+  .day-card { display: none; }
+  .day-card.active { display: block; animation: fadeIn 0.2s ease; }
+
+  .day-header {
+    background: var(--ocean); color: white;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+  }
+  .day-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 700; line-height: 1;
+    color: var(--gold); min-width: 50px;
+  }
+  .day-title-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 700; line-height: 1.2;
+  }
+  .day-title-block span { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+  .day-birthday-badge {
+    background: linear-gradient(135deg, var(--gold), #e8b040);
+    color: white; border-radius: 2rem;
+    padding: 0.3rem 0.9rem; font-size: 0.78rem; font-weight: 600;
+    margin-left: auto;
+  }
+
+  .day-body {
+    background: white; border: 1px solid rgba(0,0,0,0.07);
+    border-top: none; border-radius: 0 0 1rem 1rem;
+    padding: 1.5rem;
+  }
+  .day-weather {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: #e8f4fd; border-radius: 2rem;
+    padding: 0.35rem 0.9rem; font-size: 0.8rem; color: #1a5a8a;
+    margin-bottom: 1.1rem;
+  }
+  .day-row {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 0.65rem; font-size: 0.88rem; line-height: 1.65; color: #3a3a4a;
+  }
+  .day-row-icon { min-width: 22px; font-size: 1rem; margin-top: 1px; }
+  .day-tip {
+    background: #f0f8f0; border-left: 3px solid #4caf50;
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 0.6rem 0.9rem; font-size: 0.82rem; color: #1a4a1a;
+    margin-top: 0.75rem; line-height: 1.5;
+  }
+  .day-food {
+    background: #fffbf0; border-left: 3px solid var(--gold);
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 0.6rem 0.9rem; font-size: 0.82rem; color: #5a3a00;
+    margin-top: 0.5rem; line-height: 1.5;
+  }
+  .day-special {
+    background: linear-gradient(135deg, #fff8ee, #fff3dd);
+    border: 1px solid rgba(212,145,58,0.3);
+    border-radius: 0.75rem; padding: 0.9rem 1.1rem;
+    font-size: 0.85rem; color: #5a3a00; margin-top: 0.75rem; line-height: 1.5;
+  }
+
+  /* FLIGHT */
+  .flight-card {
+    background: white; border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 1rem; padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    flex-wrap: wrap; margin-bottom: 1rem;
+  }
+  .flight-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700; color: var(--ocean); min-width: 60px;
+  }
+  .flight-apt { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+  .flight-arrow { font-size: 1rem; color: var(--gold); flex: 1; text-align: center; }
+  .flight-info { font-size: 0.82rem; color: #4a4a5a; }
+  .badge {
+    display: inline-block;
+    background: var(--ocean); color: var(--gold-light);
+    border-radius: 0.35rem; padding: 0.2rem 0.55rem;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px;
+  }
+
+  /* PEOPLE */
+  .person-card {
+    background: white; border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 1rem; padding: 1.1rem; text-align: center;
+  }
+  .avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem; color: white;
+    margin: 0 auto 0.6rem;
+  }
+  .person-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--ocean); margin-bottom: 0.3rem;
+  }
+  .person-bio { font-size: 0.78rem; color: #5a5a6a; line-height: 1.45; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 0.45rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 0.87rem; color: #3a3a4a;
+    display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: '□'; color: var(--ocean); font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* FUN */
+  .fun-bg {
+    background: linear-gradient(135deg, var(--ocean) 0%, #0d1f3c 100%);
+    border-radius: 1.25rem; padding: 2.5rem 2rem; color: white;
+    margin-top: 1.25rem;
+  }
+  .fun-motto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-style: italic; color: var(--gold-light);
+    text-align: center; margin-bottom: 2rem; line-height: 1.4;
+  }
+  .rule {
+    background: rgba(255,255,255,0.07); border-left: 3px solid var(--gold);
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 0.7rem 1rem; font-size: 0.85rem; margin-bottom: 0.5rem;
+    line-height: 1.5; color: rgba(255,255,255,0.88);
+  }
+  .award-card-fun {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 0.875rem; padding: 1rem; text-align: center; font-size: 0.82rem;
+  }
+  .award-emoji { font-size: 1.5rem; display: block; margin-bottom: 0.35rem; }
+  .award-name { font-weight: 600; color: var(--gold-light); margin-bottom: 0.25rem; font-size: 0.88rem; }
+  .award-desc { color: rgba(255,255,255,0.68); line-height: 1.4; }
+  .sub-label {
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); text-align: center;
+    margin: 1.5rem 0 0.75rem;
+  }
+  .final-quote {
+    text-align: center; border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 1.5rem; margin-top: 1.5rem;
+  }
+  .final-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; color: var(--gold-light); font-size: 1.15rem; line-height: 1.6;
+  }
+  .final-quote small { font-size: 0.72rem; color: rgba(255,255,255,0.35); letter-spacing: 1px; margin-top: 0.5rem; display: block; }
+
+  /* FOOD TAGS */
+  .food-tag {
+    display: inline-block;
+    background: rgba(10,37,64,0.07); color: var(--ocean);
+    border-radius: 1rem; padding: 0.2rem 0.65rem;
+    font-size: 0.73rem; font-weight: 600; margin: 0.15rem;
+  }
+
+  /* ISLAND SPECIAL */
+  .island-card {
+    background: linear-gradient(135deg, #0a2540, #1a3a5c);
+    color: white; border-radius: 1.25rem; padding: 1.75rem;
+    margin: 1.25rem 0; position: relative; overflow: hidden;
+  }
+  .island-card::before {
+    content: '🏝️';
+    position: absolute; right: 1.5rem; bottom: 1rem;
+    font-size: 4rem; opacity: 0.15;
+  }
+  .island-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .island-card p { font-size: 0.87rem; line-height: 1.65; color: rgba(255,255,255,0.82); }
+  .island-detail { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+  .island-pill {
+    background: rgba(212,145,58,0.25); border: 1px solid rgba(212,145,58,0.4);
+    border-radius: 2rem; padding: 0.3rem 0.85rem;
+    font-size: 0.78rem; color: var(--gold-light); font-weight: 500;
+  }
+
+  /* BIRTHDAY CARD */
+  .bday-card {
+    background: linear-gradient(135deg, #8b1a1a, #6b0f0f);
+    color: white; border-radius: 1.25rem; padding: 1.75rem;
+    margin: 1.25rem 0; text-align: center;
+  }
+  .bday-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-style: italic; margin-bottom: 0.5rem;
+    color: var(--gold-light);
+  }
+  .bday-card p { font-size: 0.9rem; color: rgba(255,255,255,0.82); line-height: 1.65; }
+
+  /* RESPONSIVE */
+  @media (max-width: 480px) {
+    .hero { padding: 2.5rem 1.25rem 2rem; }
+    .sec { padding: 2rem 1.1rem; }
+    .hero-title { font-size: 2.6rem; }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .flight-card { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Norte Salvaje ✦</span>
+  <div class="nav-sep"></div>
+  <button class="nav-btn active" onclick="showPage('home')">Home</button>
+  <button class="nav-btn" onclick="showPage('gruppo')">Gruppo</button>
+  <button class="nav-btn" onclick="showPage('programma')">Programma</button>
+  <button class="nav-btn" onclick="showPage('logistica')">Voli & Auto</button>
+  <button class="nav-btn" onclick="showPage('alloggio')">Alloggio</button>
+  <button class="nav-btn" onclick="showPage('food')">Food</button>
+  <button class="nav-btn" onclick="showPage('esperienze')">Esperienze</button>
+  <button class="nav-btn" onclick="showPage('valigia')">Valigia</button>
+  <button class="nav-btn" onclick="showPage('note')">Note utili</button>
+  <button class="nav-btn" onclick="showPage('fun')">Fun!</button>
+</nav>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">✈ Depliant di viaggio · Estate 2026</div>
+    <h1 class="hero-title">Norte<br><em>Salvaje</em></h1>
+    <p class="hero-sub">7 giorni nei Paesi Baschi — la Spagna che non ti aspetti</p>
+    <div class="hero-dates">📅 17 – 24 giugno 2026 · 7 notti · 6 persone</div>
+    <p class="hero-quote">«Meno corse, più sapori.<br>Meno selfie, più oceano.»</p>
+    <div class="hero-chips">
+      <span class="hero-chip">🏙️ Bilbao base</span>
+      <span class="hero-chip">🎨 Guggenheim</span>
+      <span class="hero-chip">🌊 Gaztelugatxe</span>
+      <span class="hero-chip">🍢 Pintxos</span>
+      <span class="hero-chip">🏝️ Isla Santa Clara</span>
+      <span class="hero-chip">🎂 Compleanno Silvia il 19!</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-label">Il viaggio in breve</div>
+    <h2 class="sec-title">La nostra avventura basca</h2>
+    <p class="sec-text">
+      Sette giorni nella Spagna del Nord più autentica. Base fissa a <strong>Bilbao</strong>, appartamento con 3 camere per 6 persone, a pochi passi dal Casco Viejo. Ogni giorno una destinazione diversa, con l'auto noleggiata a Santander. Ritmo rilassato: una gita al giorno, pause abbondanti, pintxos obbligatori.
+    </p>
+    <div class="grid-4" style="margin-top:1.25rem;">
+      <div class="card">
+        <div class="card-title">📍 Base</div>
+        Airbnb Bilbao · 3 camere · check-in 24h · metro 3 min
+      </div>
+      <div class="card">
+        <div class="card-title">🚗 Mobilità</div>
+        Renault Espace 7 posti A/C · in città a piedi o metro
+      </div>
+      <div class="card">
+        <div class="card-title">🌡️ Clima</div>
+        20–25°C di giorno · 15–18°C sera · possibile pioggia
+      </div>
+      <div class="card">
+        <div class="card-title">🎭 Stile</div>
+        Rilassato · goloso · curioso · meglio meno e bene
+      </div>
+    </div>
+
+    <div class="divider" style="margin:2rem 0;"></div>
+
+    <div class="sec-label">Le tappe</div>
+    <h2 class="sec-title">Dove andiamo</h2>
+    <div class="grid-3">
+      <div class="card" style="border-top:3px solid var(--ocean);">
+        <div class="card-title">🏙️ Bilbao</div>
+        La base. Guggenheim, Casco Viejo, free tour, vita locale. 7 notti qui.
+      </div>
+      <div class="card" style="border-top:3px solid #2d6a4f;">
+        <div class="card-title">🌊 Gaztelugatxe</div>
+        L'isolotto con 231 gradini e la campana. Oceano a strapiombo. Gita giorno 3.
+      </div>
+      <div class="card" style="border-top:3px solid #8b4513;">
+        <div class="card-title">🕯️ Guernica</div>
+        La città simbolo. L'albero, la Casa de Juntas. Combinata con Gaztelugatxe.
+      </div>
+      <div class="card" style="border-top:3px solid #6a0dad;">
+        <div class="card-title">🎂 San Sebastián</div>
+        Il tuo compleanno! Pintxos + La Concha + Isla Santa Clara. Giorno 4.
+      </div>
+      <div class="card" style="border-top:3px solid #1a6a8a;">
+        <div class="card-title">🏝️ Isla Santa Clara</div>
+        La spiaggia che appare solo con la bassa marea. Traghetto dalla baia.
+      </div>
+      <div class="card" style="border-top:3px solid var(--gold);">
+        <div class="card-title">⚓ Santander</div>
+        Lungomare, Centro Botín, Magdalena. Ultimo giorno prima di rientrare.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ GRUPPO ============ -->
+<div id="page-gruppo" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 02</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">Il <em>Gruppo</em></h1>
+    <p class="hero-sub">6 italiani alla conquista dei Paesi Baschi</p>
+  </div>
+  <div class="sec">
+    <div class="grid-3">
+      <div class="person-card">
+        <div class="avatar" style="background:#1a3a5c;">SI</div>
+        <div class="person-name">Silvia</div>
+        <div class="person-bio">La mente organizzativa. Ha prenotato tutto, ha fatto il depliant e porta la pazienza. Il 19 giugno è il suo compleanno 🎂</div>
+      </div>
+      <div class="person-card">
+        <div class="avatar" style="background:#8b4513;">SA</div>
+        <div class="person-name">Sandro</div>
+        <div class="person-bio">Marito e pilota ufficiale. Intestatario dell'auto. Deve stampare il voucher DoYouSpain. Obbligatorio.</div>
+      </div>
+      <div class="person-card">
+        <div class="avatar" style="background:#6a5acd;">EV</div>
+        <div class="person-name">Eva</div>
+        <div class="person-bio">16 anni. Pronta per tutto — soprattutto pintxos, spiagge e avventure sull'oceano. Energia infinita.</div>
+      </div>
+      <div class="person-card">
+        <div class="avatar" style="background:#2e8b57;">LO</div>
+        <div class="person-name">Lorenzo</div>
+        <div class="person-bio">18 anni. Probabilmente il più entusiasta di Gaztelugatxe — la "Roccia del Drago" di Game of Thrones.</div>
+      </div>
+      <div class="person-card">
+        <div class="avatar" style="background:#b8860b;">EM</div>
+        <div class="person-name">Emilio</div>
+        <div class="person-bio">Amico di viaggio. Sommelier del txakoli non ufficiale. Custode della filosofia "si mangia bene o non si mangia".</div>
+      </div>
+      <div class="person-card">
+        <div class="avatar" style="background:#c06080;">EN</div>
+        <div class="person-name">Enrica</div>
+        <div class="person-bio">Amante del relax e dei mercati. Non le chiedete formaggi — non è il suo mondo. Pintxos e pesce sì, grazie.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <div class="sec-label">Da tenere a mente</div>
+      <h2 class="sec-title">Abitudini del gruppo</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">⏰ Ritmo</div>
+          Niente alzatacce. Si parte quando si è pronti, max 9:30–10:00 per le gite fuori porta. Colazione prima.
+        </div>
+        <div class="card">
+          <div class="card-title">🚶 Passo</div>
+          Una destinazione al giorno. Pause caffè obbligatorie. Nessuno che trascina nessuno di corsa.
+        </div>
+        <div class="card">
+          <div class="card-title">🍽️ Pasti</div>
+          Budget 15–20€ per i pasti principali. Nessuna allergia dichiarata. Eva e Lorenzo mangiano tutto.
+        </div>
+        <div class="card">
+          <div class="card-title">🎯 Filosofia</div>
+          Meglio meno ma bene. Meglio un posto ben vissuto che cinque visti di corsa.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROGRAMMA ============ -->
+<div id="page-programma" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 03</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">Il <em>Programma</em></h1>
+    <p class="hero-sub">Giorno per giorno — suggerimenti, non obblighi</p>
+  </div>
+  <div class="sec">
+    <div class="day-nav">
+      <button class="day-pill active" onclick="showDay(1)">17 giu · Arrivo</button>
+      <button class="day-pill" onclick="showDay(2)">18 giu · Bilbao</button>
+      <button class="day-pill birthday" onclick="showDay(3)">19 giu 🎂</button>
+      <button class="day-pill" onclick="showDay(4)">20 giu · S.Sebastián</button>
+      <button class="day-pill" onclick="showDay(5)">21 giu · Libero</button>
+      <button class="day-pill" onclick="showDay(6)">22 giu · Costa</button>
+      <button class="day-pill" onclick="showDay(7)">23 giu · Santander</button>
+      <button class="day-pill" onclick="showDay(8)">24 giu · Partenza</button>
+    </div>
+
+    <!-- G1 -->
+    <div class="day-card active" id="day-1">
+      <div class="day-header">
+        <div class="day-num">01</div>
+        <div class="day-title-block">
+          <h3>Arrivo a Bilbao — prime impressioni</h3>
+          <span>Mercoledì 17 giugno · Santander → Bilbao</span>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-weather">🌤 20–22°C · Variabile</div>
+        <div class="day-row"><span class="day-row-icon">⚠️</span><span><strong>12:05</strong> Decollo da Venezia Treviso (TSF) · Volo FR3603 Ryanair</span></div>
+        <div class="day-row"><span class="day-row-icon">🛬</span><span><strong>14:25</strong> Atterraggio Santander (SDR) · Dirigersi SUBITO all'ufficio OK Mobility nell'area Arrivi — il ritiro auto è fissato alle 14:30</span></div>
+        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~14:45</strong> Ritiro Renault Espace 7 posti · Partenza verso Bilbao (100 km, ~1h15 via A-8)</span></div>
+        <div class="day-row"><span class="day-row-icon">🏠</span><span><strong>~16:30</strong> Check-in Airbnb (dopo le 15:00) · Sistemazione bagagli, prime esplorazioni dell'appartamento</span></div>
+        <div class="day-row"><span class="day-row-icon">🚶</span><span><strong>~18:00</strong> Prima passeggiata: Casco Viejo, Las Siete Calles, Plaza Nueva — orientamento alla città</span></div>
+        <div class="day-row"><span class="day-row-icon">🍷</span><span><strong>~20:00</strong> Aperitivo + primo assaggio di pintxos in Plaza Nueva — battesimo ufficiale del viaggio</span></div>
+        <div class="alert"><strong>⚠️ Attenzione:</strong> Il margine tra atterraggio (14:25) e ritiro auto (14:30) è minimo. Niente caffè, niente soste — dritti all'ufficio OK Mobility nell'area Arrivi.</div>
+        <div class="day-food">🍽️ Cena: Plaza Nueva o Casco Viejo · Bar Víctor Montes o Café Bar Bilbao · Budget ~15€ a testa tutto incluso</div>
+      </div>
+    </div>
+
+    <!-- G2 -->
+    <div class="day-card" id="day-2">
+      <div class="day-header">
+        <div class="day-num">02</div>
+        <div class="day-title-block">
+          <h3>Bilbao — Guggenheim + Free Tour</h3>
+          <span>Giovedì 18 giugno · Base Bilbao</span>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-weather">🌤 21–24°C · Soleggiato</div>
+        <div class="day-row"><span class="day-row-icon">🦶</span><span><strong>10:00</strong> Free Walking Tour — prenotato su <strong>guruwalk.com</strong> (offerta libera). Durata ~2h. Ritrovo vicino al Teatro Arriaga. In 6 persone, prenotate su 2 slot separati perché molti organizzatori hanno limite gruppo.</span></div>
+        <div class="day-row"><span class="day-row-icon">☕</span><span><strong>~12:30</strong> Pausa caffè e pintxos — Casco Viejo</span></div>
+        <div class="day-row"><span class="day-row-icon">🌳</span><span><strong>~13:30</strong> Passeggiata al Parco Doña Casilda Iturrizar — il polmone verde di Bilbao, a due passi dal Guggenheim</span></div>
+        <div class="day-row"><span class="day-row-icon">🎨</span><span><strong>15:00</strong> Museo Guggenheim di Frank Gehry — minimo 2 ore. L'edificio in titanio è già un'opera d'arte. Audioguida inclusa nel biglietto.</span></div>
+        <div class="day-row"><span class="day-row-icon">🌆</span><span><strong>~17:30</strong> Passeggiata sul lungofiume Nervión e zona Abandoibarra · aperitivo con vista</span></div>
+        <div class="day-row"><span class="day-row-icon">🏛️</span><span><strong>Opzionale sera:</strong> Alhóndiga / Azkuna Zentroa — centro culturale con architettura sbalorditiva (192 colonne decorati da artisti locali a sostengono la piscina soprastante)</span></div>
+        <div class="day-tip">💡 Guggenheim: biglietti ~13€ adulti. Prenotate online su <strong>guggenheim-bilbao.eus</strong> — evitate le code e la fascia 11–13 che è la più affollata. No foto all'interno. Portare giacca leggera: le sale sono fresche.</div>
+        <div class="day-food">🍽️ Cena: zona Sidrería nel Casco Viejo · sidro artigianale versato dall'alto + pintxos · Budget 15–18€ a testa</div>
+      </div>
+    </div>
+
+    <!-- G3 COMPLEANNO -->
+    <div class="day-card" id="day-3">
+      <div class="day-header">
+        <div class="day-num">03</div>
+        <div class="day-title-block">
+          <h3>San Sebastián — Compleanno Silvia! 🎂</h3>
+          <span>Venerdì 19 giugno · Gita in auto</span>
+        </div>
+        <div class="day-birthday-badge">🎂 Il tuo giorno!</div>
+      </div>
+      <div class="day-body">
+        <div class="day-weather">🌞 22–25°C · Il miglior giugno per festeggiare</div>
+
+        <div class="bday-card">
+          <h3>Buon compleanno, Silvia!</h3>
+          <p>Hai scelto il posto giusto per festeggiare: una delle città con la più alta concentrazione di stelle Michelin al mondo, una spiaggia da sogno e un'isola che appare solo con la bassa marea. Non male per un venerdì di giugno.</p>
+        </div>
+
+        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>Partenza 9:30</strong> da Bilbao verso San Sebastián (~1h10 via A-8)</span></div>
+        <div class="day-row"><span class="day-row-icon">🏖️</span><span><strong>~11:00</strong> Playa de La Concha — la baia a forma di conchiglia, una delle più belle d'Europa. Passeggiata sul lungomare, foto panoramiche.</span></div>
+        <div class="day-row"><span class="day-row-icon">🥾</span><span><strong>~12:00</strong> Salita al Monte Urgull — sentieri ombreggiati, vista sulla baia, sul Faro e sull'isola di Santa Clara.</span></div>
+
+        <div class="island-card">
+          <h3>🏝️ Isla de Santa Clara — la tappa che vuoi!</h3>
+          <p>Al centro della Baia della Concha c'è questa piccola isola protetta. La sua spiaggia appare e scompare con le maree — visibile solo con la bassa marea. Si raggiunge con il traghetto "Motoras de la Isla" che parte dal porto ogni ora.</p>
+          <div class="island-detail">
+            <span class="island-pill">⛵ Traghetto: ~8€ andata/ritorno</span>
+            <span class="island-pill">🕐 Ogni ora da giugno a settembre</span>
+            <span class="island-pill">⏱️ Partenza dal porto di San Sebastián</span>
+            <span class="island-pill">🏊 Bar, bagnini e docce in estate</span>
+            <span class="island-pill">📷 Vista sul Comb of the Winds di Chillida</span>
+          </div>
+          <p style="margin-top:0.75rem; font-size:0.82rem; color:rgba(255,255,255,0.7);">⚠️ La spiaggia è visibile solo con la bassa marea. Controllate le maree del 19 giugno su <strong>tide-forecast.com</strong> prima di partire per scegliere l'orario migliore.</p>
+        </div>
+
+        <div class="day-row"><span class="day-row-icon">🍢</span><span><strong>~15:30–17:30</strong> Ir de pintxos nella Parte Vieja — il rito basco perfetto per festeggiare. Bar in bar assaggiando 2–3 pintxos con un bicchierino di txakoli.</span></div>
+        <div class="day-row"><span class="day-row-icon">📸</span><span><strong>~17:30</strong> Plaza de la Constitución e centro storico art nouveau</span></div>
+        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~19:00</strong> Rientro a Bilbao (~1h10)</span></div>
+
+        <div class="day-special">
+          🎉 <strong>Cena di compleanno a Bilbao:</strong> meritate una cena speciale stasera. Considerate un ristorante nel quartiere Ensanche o un posto con chuletón (costata basca) — budget extra di 30–40€ a testa vale il momento.
+        </div>
+        <div class="day-food">🍽️ Pintxos a San Sebastián: Atari, Ganbara o Sirimiri nella Parte Vieja · 2–5€ a pintxo · Cena di gala a Bilbao · Budget giornata: ~30–40€</div>
+      </div>
+    </div>
+
+    <!-- G4 -->
+    <div class="day-card" id="day-4">
+      <div class="day-header">
+        <div class="day-num">04</div>
+        <div class="day-title-block">
+          <h3>Gaztelugatxe + Guernica</h3>
+          <span>Sabato 20 giugno · Gita in auto</span>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-weather">🌤 20–23°C · Controllate il vento atlantico</div>
+        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>Partenza 9:30</strong> verso Gaztelugatxe (~45 min da Bilbao). Parcheggio a pagamento vicino al sito.</span></div>
+        <div class="day-row"><span class="day-row-icon">🏔️</span><span><strong>~11:00</strong> <strong>San Juan de Gaztelugatxe</strong> — 231 gradini fino alla cappella sull'isolotto. Panorama mozzafiato sull'Atlantico. Suonate la campana 3 volte: porta fortuna! Durata ~1h30 a/r.</span></div>
+        <div class="day-row"><span class="day-row-icon">🍺</span><span><strong>~13:00</strong> Pausa birra/snack a Bakio o Bermeo — meritata dopo i gradini</span></div>
+        <div class="day-row"><span class="day-row-icon">🕯️</span><span><strong>~15:00</strong> <strong>Guernica</strong> (~20 min): Casa de Juntas con la quercia storica basca, murale ispirato al Picasso, centro storico autentico</span></div>
+        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~17:30</strong> Rientro a Bilbao (~30 min)</span></div>
+        <div class="day-tip">💡 Lorenzo è ufficialmente autorizzato a dire "Dragonstone!" una volta sola. Poi silenzio. Scarpe da camminata obbligatorie — i gradini sono rocciosi ma fattibili da tutti.</div>
+        <div class="day-food">🍽️ Pranzo pesce fresco a Bermeo o Bakio (menù del giorno ~12–15€) · Cena Bilbao, zona Ensanche: più locale e meno turistica del Casco Viejo</div>
+      </div>
+    </div>
+
+    <!-- G5 -->
+    <div class="day-card" id="day-5">
+      <div class="day-header">
+        <div class="day-num">05</div>
+        <div class="day-title-block">
+          <h3>Bilbao — giorno libero</h3>
+          <span>Domenica 21 giugno · Base Bilbao</span>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-weather">🌤 20–24°C · Giornata ideale per la città</div>
+        <div class="day-row"><span class="day-row-icon">💤</span><span><strong>Mattina tranquilla</strong> — niente sveglie. Colazione all'aperto nei bar del Casco Viejo.</span></div>
+        <div class="day-row"><span class="day-row-icon">🛒</span><span><strong>~10:30</strong> <strong>Mercado de la Ribera</strong> — il più grande mercato coperto d'Europa. Formaggi (per chi li ama!), pesce, prodotti baschi, txakoli sfuso. La domenica mattina è vivace.</span></div>
+        <div class="day-row"><span class="day-row-icon">🏛️</span><span><strong>Pomeriggio — scegliete:</strong><br>A) Museo de Bellas Artes (gratuito la domenica) · B) Funivia sull'Artxanda — vista panoramica su Bilbao · C) Shopping nel Casco Viejo: prodotti baschi, ceramiche, libri, txakoli</span></div>
+        <div class="day-row"><span class="day-row-icon">🌆</span><span><strong>Sera</strong> — ultimo giro nel Casco Viejo. Aperitivo, passeggiata sul Nervión, relax.</span></div>
+        <div class="day-tip">💡 La domenica il Museo de Bellas Artes è gratuito dalle 10:00 — ottima opportunità se avete ancora voglia di arte dopo il Guggenheim. La funivia vale per i panorami.</div>
+        <div class="day-food">🍽️ Menú del día in un ristorante dell'Ensanche: primo + secondo + vino + dessert ~12–15€ · Cena leggera pintxos</div>
+      </div>
+    </div>
+
+    <!-- G6 -->
+    <div class="day-card" id="day-6">
+      <div class="day-header">
+        <div class="day-num">06</div>
+        <div class="day-title-block">
+          <h3>Costa basca o Ponte di Vizcaya</h3>
+          <span>Lunedì 22 giugno · Flessibile in base al meteo</span>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-weather">🌤 21–24°C · Decidete in base al cielo</div>
+        <div class="day-row"><span class="day-row-icon">☀️</span><span><strong>Se c'è sole → Spiaggia:</strong> Playa de Sopelana o Playa de Ereaga a Getxo (~20 min da Bilbao) — belle, meno affollate di San Sebastián, ottimo per Eva e Lorenzo</span></div>
+        <div class="day-row"><span class="day-row-icon">🌉</span><span><strong>Se è nuvoloso → Ponte di Vizcaya:</strong> A Getxo, Patrimonio UNESCO. Il solo ponte sospeso traghettante al mondo, 1893. Visitabile a piedi o salendo sulla passerella (viste fantastiche). ~20 min da Bilbao.</span></div>
+        <div class="day-row"><span class="day-row-icon">🍷</span><span><strong>Alternativa → Rioja Alavesa:</strong> Se qualcuno ama il vino, la Strada del Vino è a ~45 min. Cantine, degustazioni e paesaggi toscani. Ottimo per Emilio.</span></div>
+        <div class="day-row"><span class="day-row-icon">🏠</span><span><strong>Sera a Bilbao:</strong> Cena nel quartiere Indautxu, più locale e meno turistico.</span></div>
+        <div class="day-tip">💡 Getxo è un quartiere nobile di Bilbao: il Ponte UNESCO + una passeggiata sul lungomare + pranzo di pesce = giornata perfetta anche con cielo grigio.</div>
+        <div class="day-food">🍽️ Pranzo: grigliata di pesce in un chiringuito sulla spiaggia (~15–20€) oppure picnic con prodotti del Mercato della Ribera</div>
+      </div>
+    </div>
+
+    <!-- G7 -->
+    <div class="day-card" id="day-7">
+      <div class="day-header">
+        <div class="day-num">07</div>
+        <div class="day-title-block">
+          <h3>Santander — il gran finale</h3>
+          <span>Martedì 23 giugno · Ultima gita in auto</span>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-weather">🌤 20–23°C</div>
+        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>Partenza 10:00</strong> da Bilbao → Santander (~1h15 via A-8)</span></div>
+        <div class="day-row"><span class="day-row-icon">🏛️</span><span><strong>~11:30</strong> Paseo de Pereda (lungomare storico) · Cattedrale di Santander · <strong>Centro Botín</strong> di Renzo Piano — gioiello architettonico affacciato sulla baia</span></div>
+        <div class="day-row"><span class="day-row-icon">🏖️</span><span><strong>~13:00</strong> <strong>Playa El Sardinero</strong> — la spiaggia più famosa di Santander, oltre 1 km di arenile, edifici storici del '900 sul lungomare. Bagno se il tempo lo permette.</span></div>
+        <div class="day-row"><span class="day-row-icon">🌿</span><span><strong>~15:30</strong> <strong>Penisola de la Magdalena</strong> — parco verde con il Palazzo Reale affacciato sull'oceano, faro, sentieri panoramici. Passeggiata con vista su due mari.</span></div>
+        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~17:30</strong> Rientro a Bilbao (~1h15) · Cena, relax, preparazione valigie</span></div>
+        <div class="alert"><strong>📦 Sera del 23:</strong> Preparate le valigie stasera! Il check-out del 24 è alle 11:00 e subito dopo si parte per Santander aeroporto.</div>
+        <div class="day-food">🍽️ Pranzo a Santander: paella del Cantábrico (specialità locale, pesce atlantico) o grigliata di mare · Budget 15–20€ · Cena leggera a Bilbao</div>
+      </div>
+    </div>
+
+    <!-- G8 -->
+    <div class="day-card" id="day-8">
+      <div class="day-header">
+        <div class="day-num">08</div>
+        <div class="day-title-block">
+          <h3>Rientro — ci vediamo Italia!</h3>
+          <span>Mercoledì 24 giugno · Bilbao → Santander → Venezia Treviso</span>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-weather">☀️ Qualunque tempo sia, si torna a casa</div>
+        <div class="day-row"><span class="day-row-icon">⏰</span><span><strong>Entro le 11:00</strong> Check-out dall'Airbnb — valigie pronte la sera prima!</span></div>
+        <div class="day-row"><span class="day-row-icon">☕</span><span><strong>~10:30</strong> Ultima colazione basca a Bilbao. Ultimo pintxo. Sentitevi liberi di piangere.</span></div>
+        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~11:00</strong> Partenza verso aeroporto di Santander (~1h15 via A-8)</span></div>
+        <div class="day-row"><span class="day-row-icon">🅿️</span><span><strong>~12:30</strong> Resa auto OK Mobility — area Arrivi aeroporto Santander (SDR) · Presentare voucher + documenti</span></div>
+        <div class="day-row"><span class="day-row-icon">🛫</span><span><strong>14:50</strong> Volo FR3602 Santander → Venezia Treviso (TSF) · Ryanair</span></div>
+        <div class="day-row"><span class="day-row-icon">🏠</span><span><strong>16:55</strong> Arrivo a Treviso. Racconti, foto, rimpianti, e già la voglia di tornare.</span></div>
+        <div class="alert"><strong>⏰ Tempistica stretta:</strong> Check-out 11:00 + guida 1h15 + resa auto + check-in aeroporto. Partite puntuali — non c'è margine per imprevisti. Siate all'aeroporto entro le 13:00.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ LOGISTICA ============ -->
+<div id="page-logistica" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 04</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">Voli & <em>Auto</em></h1>
+    <p class="hero-sub">Tutto quello che serve per non perdere aerei né depositi</p>
+  </div>
+  <div class="sec">
+    <div class="sec-label">Voli</div>
+    <h2 class="sec-title">Ryanair · GQWS5V</h2>
+
+    <div class="flight-card">
+      <div>
+        <div class="flight-time">12:05</div>
+        <div class="flight-apt">Venezia Treviso (TSF)</div>
+      </div>
+      <div class="flight-arrow">✈ ————————</div>
+      <div>
+        <div class="flight-time">14:25</div>
+        <div class="flight-apt">Santander (SDR)</div>
+      </div>
+      <div style="margin-left:auto; text-align:right;">
+        <span class="badge">FR3603</span>
+        <div class="flight-info" style="margin-top:0.35rem;">17 giugno 2026 · Andata</div>
+      </div>
+    </div>
+
+    <div class="flight-card">
+      <div>
+        <div class="flight-time">14:50</div>
+        <div class="flight-apt">Santander (SDR)</div>
+      </div>
+      <div class="flight-arrow">✈ ————————</div>
+      <div>
+        <div class="flight-time">16:55</div>
+        <div class="flight-apt">Venezia Treviso (TSF)</div>
+      </div>
+      <div style="margin-left:auto; text-align:right;">
+        <span class="badge">FR3602</span>
+        <div class="flight-info" style="margin-top:0.35rem;">24 giugno 2026 · Ritorno</div>
+      </div>
+    </div>
+
+    <div class="alert"><strong>⚠️ Attenzione resa auto il 24:</strong> Check-out Airbnb alle 11:00 → guida fino a Santander ~1h15 → resa auto alle 12:30 → check-in aeroporto. Partite puntuali, senza soste.</div>
+
+    <div class="divider" style="margin:2rem 0;"></div>
+
+    <div class="sec-label">Auto noleggio</div>
+    <h2 class="sec-title">DoYouSpain · DYS-197926900</h2>
+
+    <div class="infobox">
+      <strong>Veicolo:</strong> Renault Espace 7 posti A/C (o simile)<br>
+      <strong>Totale pagato:</strong> 386,12 €<br><br>
+      <strong>Ritiro:</strong> 17/06/2026 ore 14:30 · Santander Aeroporto (SDR)<br>
+      → Ufficio OK Mobility Rent A Car · Area Arrivi<br><br>
+      <strong>Resa:</strong> 24/06/2026 ore 12:30 · Santander Aeroporto (SDR)<br><br>
+      <strong>📞 DoYouSpain:</strong> support.doyouspain.com · +34 964 830 995
+    </div>
+
+    <div class="alert">
+      <strong>⚠️ Da portare obbligatoriamente (NO copie digitali, NO fotocopie):</strong><br>
+      ✓ Voucher stampato (Sandro — stampa prima di partire!)<br>
+      ✓ Patente originale del conducente (Sandro)<br>
+      ✓ Carta d'identità o passaporto originale<br>
+      ✓ Carta di credito originale + PIN (se la carta ha PIN associato)<br><br>
+      <strong>Nota:</strong> Tariffa non rimborsabile — nessuna modifica o cancellazione possibile.
+    </div>
+
+    <div class="divider" style="margin:2rem 0;"></div>
+
+    <div class="sec-label">Spostamenti</div>
+    <h2 class="sec-title">Come ci muoviamo</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Tratta</th><th>Distanza</th><th>Tempo</th><th>Note</th></tr>
+        <tr><td>Santander → Bilbao</td><td>~100 km</td><td>~1h15</td><td>Via A-8, autostrada a pedaggio</td></tr>
+        <tr><td>Bilbao → Gaztelugatxe</td><td>~35 km</td><td>~45 min</td><td>Via BI-2101, strada costiera</td></tr>
+        <tr><td>Bilbao → San Sebastián</td><td>~100 km</td><td>~1h10</td><td>Via A-8</td></tr>
+        <tr><td>Bilbao → Guernica</td><td>~35 km</td><td>~30 min</td><td>Via BI-635</td></tr>
+        <tr><td>Bilbao → Getxo</td><td>~15 km</td><td>~20 min</td><td>Metro o auto</td></tr>
+        <tr><td>Bilbao → Santander</td><td>~115 km</td><td>~1h15</td><td>Via A-8</td></tr>
+      </table>
+    </div>
+    <div class="success-box">💡 A Bilbao in città: usate sempre il metro (linea 1 e 2) o i piedi. Economico, efficiente, niente parcheggio. Biglietto singolo ~1,70€. Tessera ricaricabile Barik consigliata.</div>
+  </div>
+</div>
+
+<!-- ============ ALLOGGIO ============ -->
+<div id="page-alloggio" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 05</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">La nostra <em>Casa</em></h1>
+    <p class="hero-sub">7 notti all'Airbnb di Alberto a Bilbao</p>
+  </div>
+  <div class="sec">
+    <div class="infobox">
+      <strong>📍 Airbnb — Appartamento intero (host: Alberto)</strong><br>
+      Julian Gaiarre Hiribidea, 94 — 48004 Bilbao, Euskadi, Spain<br><br>
+      🛏️ Piano 3 · 3 camere + 2 bagni · Check-in 24h · Metro a 3 min · WiFi<br>
+      👥 6 adulti<br><br>
+      ✅ <strong>Check-in:</strong> Mercoledì 17 giugno — dopo le 15:00<br>
+      ✅ <strong>Check-out:</strong> Mercoledì 24 giugno — entro le 11:00
+    </div>
+
+    <div class="alert">
+      <strong>📅 Mattina del 24 giugno:</strong> Check-out entro le 11:00 e il volo è alle 14:50 a Santander. Preparate le valigie la sera del 23 per avere tutto pronto. Partite da Bilbao alle 11:00 in punto.
+    </div>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div class="card">
+        <div class="card-title">📍 Posizione</div>
+        Quartiere centrale, vicino al Casco Viejo. A piedi: Plaza Nueva 10 min, Guggenheim 20 min. Metro a 3 minuti.
+      </div>
+      <div class="card">
+        <div class="card-title">🚇 Metro Bilbao</div>
+        Linee 1 e 2. Bilbao centro ↔ aeroporto ~30 min. Biglietto ~1,70€. Tessera Barik ricaricabile consigliata per risparmiare.
+      </div>
+      <div class="card">
+        <div class="card-title">🅿️ Auto</div>
+        Non portate l'auto in centro. Parcheggiate nei pressi dell'appartamento (parcheggi coperti disponibili in zona) e muovetevi a piedi o metro.
+      </div>
+      <div class="card">
+        <div class="card-title">🛒 Spesa</div>
+        Supermercati vicini: Mercadona o Eroski. Ottimi per fare scorta di txakoli, pintxos da frigo e snack per le gite fuori porta.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FOOD ============ -->
+<div id="page-food" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 06</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">Food & <em>Drink</em></h1>
+    <p class="hero-sub">I Paesi Baschi mangiano meglio di chiunque altro in Europa</p>
+  </div>
+  <div class="sec">
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">🥖 Pintxos</div>
+        Il cibo simbolo. Fette di pane con ingredienti tenuti da uno stuzzicadenti. Si mangiano in piedi al bancone. 2–5€ l'uno. Obbligatori ogni giorno.
+      </div>
+      <div class="card">
+        <div class="card-title">🍷 Txakoli</div>
+        Vino bianco leggermente frizzante e acidulo, tipico basco. Versato dall'alto per ossigenarlo. Abbinamento ideale con pesce e pintxos.
+      </div>
+      <div class="card">
+        <div class="card-title">🍎 Sidro</div>
+        La sidra basca è una religione locale. Nelle sidrerie viene versata dall'alto in bicchieri larghi. Esperienza da fare almeno una sera.
+      </div>
+      <div class="card">
+        <div class="card-title">🐟 Bacalao</div>
+        Il baccalà in mille versioni: al pil-pil, vizcaína, a la plancha. La proteina basca per eccellenza. Sempre fresco, sempre buono.
+      </div>
+      <div class="card">
+        <div class="card-title">🦐 Frutti di mare</div>
+        Txangurro (granchio), acciughe del Cantabrico, calamari. Il pesce è atlantico, freschissimo. Qualità superiore al Mediterraneo.
+      </div>
+      <div class="card">
+        <div class="card-title">🥩 Chuletón</div>
+        La costata basca è leggendaria. Se avete voglia di una cena "grande" una sera, vale il budget extra. 30–45€ a testa ma è un'esperienza.
+      </div>
+    </div>
+
+    <div class="divider" style="margin:2rem 0;"></div>
+    <div class="sec-label">Budget</div>
+    <h2 class="sec-title">Quanto si spende</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Tipo pasto</th><th>Costo a testa</th><th>Quando</th></tr>
+        <tr><td>Colazione (caffè + croissant)</td><td>3–5€</td><td>Ogni mattina</td></tr>
+        <tr><td>Pintxos + drink (giro bar)</td><td>10–15€</td><td>Pranzo veloce / aperitivo</td></tr>
+        <tr><td>Menú del día</td><td>12–15€</td><td>Pranzo seduto</td></tr>
+        <tr><td>Cena al ristorante</td><td>18–25€</td><td>Cena standard</td></tr>
+        <tr><td>Cena speciale (pesce/carne)</td><td>30–45€</td><td>Una o due sere (es. compleanno)</td></tr>
+      </table>
+    </div>
+
+    <div class="divider" style="margin:2rem 0;"></div>
+    <div class="sec-label">Dove mangiare</div>
+    <h2 class="sec-title">Posti consigliati</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🏙️ Bilbao</div>
+        Bar Víctor Montes (Plaza Nueva) · Café Bar Bilbao (Plaza Nueva) · Mercado de la Ribera (mattina) · Zona Ensanche per ristoranti meno turistici
+      </div>
+      <div class="card">
+        <div class="card-title">🌊 San Sebastián</div>
+        Atari (Parte Vieja, ottimi pintxos vegetariani) · Ganbara (Calle San Jerónimo) · Sirimiri (di fronte ad Atari, ottimi cocktail) · Zeruko (pesce)
+      </div>
+      <div class="card">
+        <div class="card-title">⚓ Bermeo / Bakio</div>
+        Qualsiasi baretto sul porto per pesce fresco del giorno e menù del giorno ~12–15€. Chiedete cosa c'è di fresco.
+      </div>
+      <div class="card">
+        <div class="card-title">⚓ Santander</div>
+        Ristoranti sul lungomare Paseo de Pereda · Bodega Fuente Dé (formaggi locali per chi li ama) · Zona spiaggia El Sardinero per paella Cantábrica
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ESPERIENZE ============ -->
+<div id="page-esperienze" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 07</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">Le <em>Esperienze</em></h1>
+    <p class="hero-sub">Imperdibili, consigliate e alternative per ogni giornata</p>
+  </div>
+  <div class="sec">
+    <div class="sec-label">Imperdibili assoluti</div>
+    <h2 class="sec-title">Da non saltare</h2>
+    <ul class="checklist">
+      <li><strong>Guggenheim Museum Bilbao</strong> — arte + architettura da sogno. Prenotate online su guggenheim-bilbao.eus (13€ adulti, riduzione under 18)</li>
+      <li><strong>Free Walking Tour Bilbao</strong> — guruwalk.com, offerta libera. Ottimo per orientarsi il primo giorno pieno in città</li>
+      <li><strong>San Juan de Gaztelugatxe</strong> — i 231 gradini, la campana, l'oceano. Indimenticabile. Scarpe comode obbligatorie.</li>
+      <li><strong>Ir de pintxos a San Sebastián</strong> — nella Parte Vieja, di bar in bar. Il rito basco più autentico.</li>
+      <li><strong>Isla de Santa Clara</strong> — traghetto dalla baia, spiaggia che appare con la bassa marea. Controllare orari bassa marea su tide-forecast.com</li>
+      <li><strong>Mercado de la Ribera a Bilbao</strong> — il sabato mattina è al massimo. Il più grande mercato coperto d'Europa.</li>
+    </ul>
+
+    <div class="divider" style="margin:2rem 0;"></div>
+    <div class="sec-label">Consigliate</div>
+    <h2 class="sec-title">Se avete tempo</h2>
+    <ul class="checklist">
+      <li>Playa de La Concha, San Sebastián — una delle spiagge più belle d'Europa</li>
+      <li>Monte Urgull (San Sebastián) — sentieri ombreggiati, vista sulla baia e sull'isola Santa Clara</li>
+      <li>Ponte di Vizcaya a Getxo — Patrimonio UNESCO, unico al mondo, costruito nel 1893</li>
+      <li>Guernica — la Casa de Juntas, l'albero storico basco, il murale ispirato a Picasso</li>
+      <li>Funivia Artxanda (Bilbao) — vista panoramica sulla città, ottima per tramonto</li>
+      <li>Penisola de la Magdalena (Santander) — parco, palazzo reale, vista su due mari</li>
+    </ul>
+
+    <div class="divider" style="margin:2rem 0;"></div>
+    <div class="sec-label">In caso di pioggia</div>
+    <h2 class="sec-title">Piano B</h2>
+    <ul class="checklist">
+      <li>Museo de Bellas Artes di Bilbao — gratuito la domenica, raccolta straordinaria</li>
+      <li>Alhóndiga / Azkuna Zentroa — centro culturale con 43 colonne di artisti diversi che reggono una piscina. Architettura surreale.</li>
+      <li>Degustazione in cantina nella Rioja Alavesa (~45 min da Bilbao)</li>
+      <li>Shopping nel Casco Viejo + caffè nelle strade storiche medievali</li>
+      <li>Centro Botín di Santander (Renzo Piano) — arte contemporanea basca</li>
+    </ul>
+
+    <div class="island-card" style="margin-top:1.5rem;">
+      <h3>🏝️ Isla de Santa Clara — le istruzioni complete</h3>
+      <p>L'isola si trova al centro della Baia della Concha a San Sebastián. La sua spiaggia è l'unica orientata a sud di tutto il Paese Basco, e appare solo con la bassa marea. Si raggiunge con il traghetto "Motoras de la Isla" che parte dal porto di San Sebastián. Non si può raggiungere a piedi — anche con la bassa marea estrema non c'è collegamento con la terraferma. Il nuoto è possibile ma sconsigliato per il mare atlantico.</p>
+      <div class="island-detail">
+        <span class="island-pill">⛵ ~8€ andata e ritorno</span>
+        <span class="island-pill">🕐 Ogni ora · 1 giugno – 30 settembre</span>
+        <span class="island-pill">🏊 Bar + bagnini + docce in estate</span>
+        <span class="island-pill">📷 Faro del 1864</span>
+        <span class="island-pill">🌊 Spiaggia visibile solo con bassa marea</span>
+      </div>
+      <p style="margin-top:0.75rem; font-size:0.82rem; color:rgba(255,255,255,0.7);">Prima di andare, cercate "low tide San Sebastian June 19 2026" su tide-forecast.com per sapere gli orari esatti della bassa marea e programmare la visita di conseguenza.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VALIGIA ============ -->
+<div id="page-valigia" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 08</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">La <em>Valigia</em></h1>
+    <p class="hero-sub">Cosa mettere, cosa non dimenticare</p>
+  </div>
+  <div class="sec">
+    <div class="infobox">
+      <strong>🌡️ Clima atteso a giugno nei Paesi Baschi</strong><br>
+      Giorno: 20–25°C · Sera: 15–18°C · Acqua del mare: ~18–20°C<br>
+      Giornate di luce: ~15 ore (tramonto ~21:00)<br>
+      La regione è verde per una ragione: la pioggia atlantica è sempre possibile. Portate sempre un layer impermeabile leggero, anche nelle giornate di sole.
+    </div>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div class="card">
+        <div class="card-title">👕 Abbigliamento indispensabile</div>
+        T-shirt (5–6 pezzi) · Pantaloni leggeri o jeans · Felpa o cardigan · Impermeabile leggero / k-way · Scarpe comode da camminata · Sandali o infradito · Un outfit serata per la cena di compleanno
+      </div>
+      <div class="card">
+        <div class="card-title">👙 Per la spiaggia</div>
+        Costume da bagno (2) · Asciugamano da spiaggia · Crema solare SPF30+ · Occhiali da sole · Cappello o fascia
+      </div>
+      <div class="card">
+        <div class="card-title">💊 Farmacia & salute</div>
+        Antidolorifico · Cerotti vari · Antistaminico · Farmaci personali · Crema doposole · Repellente zanzare (sera) · TEAM - Tessera Europea Assicurazione Malattia
+      </div>
+      <div class="card">
+        <div class="card-title">📱 Tecnologia</div>
+        Caricatori e cavi · Power bank · Fotocamera o smartphone con spazio · Auricolari · Adattatore non necessario (Spagna = prese europee)
+      </div>
+      <div class="card">
+        <div class="card-title">📄 Documenti — obbligatori</div>
+        Carta d'identità o passaporto (tutti e 6) · Patente originale (Sandro) · Voucher auto stampato (Sandro) · Conferma Airbnb · Biglietti volo · Carta di credito con PIN
+      </div>
+      <div class="card">
+        <div class="card-title">🎒 Accessori utili</div>
+        Zaino o borsa da giorno per le gite · Bottiglia riutilizzabile · Snack per le escursioni (Gaztelugatxe!) · Qualche euro in contanti per parcheggi e mercati
+      </div>
+    </div>
+
+    <div class="success-box" style="margin-top:1.5rem;">
+      💡 <strong>Ryanair bagagli:</strong> Verificate le regole bagaglio aggiornate su ryanair.com prima di fare le valigie. Il bagaglio a mano incluso (40x20x25 cm) + borsa personale. Bagaglio in stiva a pagamento se non già incluso nella prenotazione.
+    </div>
+  </div>
+</div>
+
+<!-- ============ NOTE UTILI ============ -->
+<div id="page-note" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 09</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">Note <em>Utili</em></h1>
+    <p class="hero-sub">Contatti, link, regole e checklist finale</p>
+  </div>
+  <div class="sec">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📞 Contatti emergenza</div>
+        <strong>Emergenze Spagna:</strong> 112<br>
+        <strong>Polizia:</strong> 091<br>
+        <strong>Pronto soccorso Bilbao:</strong> Hospital de Basurto · C/ Montevideo 18<br>
+        <strong>Consolato IT a Bilbao:</strong> +34 94 416 02 44
+      </div>
+      <div class="card">
+        <div class="card-title">📞 Contatti viaggio</div>
+        <strong>DoYouSpain (auto):</strong> +34 964 830 995<br>
+        <strong>Support:</strong> support.doyouspain.com<br>
+        <strong>Ryanair:</strong> ryanair.com (gestisci prenotazione)<br>
+        <strong>Airbnb:</strong> app Airbnb · host Alberto
+      </div>
+      <div class="card">
+        <div class="card-title">🔗 Link utili</div>
+        guggenheim-bilbao.eus<br>
+        guruwalk.com/it/bilbao<br>
+        civitatis.com/it/bilbao<br>
+        tide-forecast.com (maree)<br>
+        bilbao.eus (info città)<br>
+        google.com/maps (offline!)
+      </div>
+      <div class="card">
+        <div class="card-title">💳 Denaro</div>
+        Bancomat (cajero) ovunque in Spagna. Carta accettata quasi sempre. Tenete sempre 20–30€ in contanti per parcheggi, mercati, traghetto Santa Clara. PIN obbligatorio per noleggio auto.
+      </div>
+      <div class="card">
+        <div class="card-title">🗣️ Lingua</div>
+        Spagnolo + basco (euskara). Con lo spagnolo base ci si arrangia ovunque. "Eskerrik asko" = grazie in basco. Fa sempre un bell'effetto con i locali.
+      </div>
+      <div class="card">
+        <div class="card-title">📱 App consigliate</div>
+        Google Maps (scaricate offline Bilbao, S.Sebastián, Santander) · Meteo locale · Tide-forecast per le maree · Google Translate · Ryanair app
+      </div>
+    </div>
+
+    <div class="divider" style="margin:2rem 0;"></div>
+    <div class="sec-label">Prima di partire</div>
+    <h2 class="sec-title">Checklist finale</h2>
+    <ul class="checklist">
+      <li>Voucher auto DoYouSpain stampato — Sandro, fallo adesso</li>
+      <li>Patente originale nella borsa di viaggio — Sandro</li>
+      <li>Carte d'identità o passaporti validi per tutti e 6</li>
+      <li>Biglietti volo scaricati o stampati (codice GQWS5V)</li>
+      <li>Conferma Airbnb con indirizzo (Julian Gaiarre Hiribidea 94, Bilbao)</li>
+      <li>Biglietti Guggenheim prenotati online (guggenheim-bilbao.eus)</li>
+      <li>Free Tour Bilbao prenotato su guruwalk.com per il 18 giugno mattina</li>
+      <li>Carta di credito con PIN del conducente (per deposito noleggio)</li>
+      <li>TEAM (Tessera Europea Assicurazione Malattia) per tutti</li>
+      <li>Google Maps offline scaricata per Bilbao, San Sebastián, Santander</li>
+      <li>Controllare maree San Sebastián il 19 giugno su tide-forecast.com</li>
+      <li>Assicurazione di viaggio attivata (consigliata ma opzionale)</li>
+      <li>Power bank carico per le gite</li>
+      <li>Scarpe da camminata comode per Gaztelugatxe nel bagaglio</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ FUN ============ -->
+<div id="page-fun" class="page">
+  <div class="hero" style="min-height:220px;">
+    <div class="hero-pattern"></div>
+    <div class="hero-tag">Sezione 10</div>
+    <h1 class="hero-title" style="font-size:2.8rem;">La parte <em>seria</em> 😏</h1>
+    <p class="hero-sub">Regole, premi e previsioni</p>
+  </div>
+  <div class="sec">
+    <div class="fun-bg">
+      <div class="fun-motto">"Norte Salvaje — mangiamo, esploriamo,<br>torneremo più grassi e più felici."</div>
+
+      <div class="sub-label">Le regole non ufficiali del gruppo</div>
+      <div class="rule">Nessuno può dire "facciamo in fretta" durante i pintxos. I pintxos non conoscono l'urgenza.</div>
+      <div class="rule">Il conducente (Sandro) ha sempre ragione sul percorso. Fino a quando non sbaglia. Poi ha comunque ragione lui.</div>
+      <div class="rule">Silvia ha organizzato tutto. Le si dice grazie almeno una volta al giorno. Possibilmente con un txakoli in mano.</div>
+      <div class="rule">Lorenzo può citare Game of Thrones a Gaztelugatxe: una volta sola. Dopo quella, silenzio.</div>
+      <div class="rule">Eva (16 anni) può fare qualunque cosa purché non sia pericolosa. Salire 231 gradini conta come attività sicura.</div>
+      <div class="rule">A Enrica non si chiedono pareri sui formaggi. Baccalà, sì. Formaggi, no. Punto.</div>
+      <div class="rule">Emilio è il responsabile ufficiale del livello di soddisfazione gastronomica del gruppo. Funzione onorifica e irrevocabile.</div>
+
+      <div class="sub-label" style="margin-top:2rem;">Premi simbolici</div>
+      <div class="grid-3" style="gap:0.75rem; margin-top:0.5rem;">
+        <div class="award-card-fun">
+          <span class="award-emoji">🗺️</span>
+          <div class="award-name">Silvia</div>
+          <div class="award-desc">Premio "Architetto del Caos Organizzato" — ha prenotato tutto, incluso questo depliant</div>
+        </div>
+        <div class="award-card-fun">
+          <span class="award-emoji">🚗</span>
+          <div class="award-name">Sandro</div>
+          <div class="award-desc">Premio "Pilota Atlantico" — 7 giorni di guida in autostrade spagnole senza perdersi mai (si spera)</div>
+        </div>
+        <div class="award-card-fun">
+          <span class="award-emoji">🌊</span>
+          <div class="award-name">Eva</div>
+          <div class="award-desc">Premio "Prima all'Oceano" — a 16 anni la prima a tuffarsi a La Concha, ovviamente</div>
+        </div>
+        <div class="award-card-fun">
+          <span class="award-emoji">🐉</span>
+          <div class="award-name">Lorenzo</div>
+          <div class="award-desc">Premio "Dracarys!" — la reazione più memorabile davanti a Gaztelugatxe garantita</div>
+        </div>
+        <div class="award-card-fun">
+          <span class="award-emoji">🍷</span>
+          <div class="award-name">Emilio</div>
+          <div class="award-desc">Premio "Sommelier del Txakoli" — nessuno ha valutato ogni bicchiere con più serietà</div>
+        </div>
+        <div class="award-card-fun">
+          <span class="award-emoji">🐟</span>
+          <div class="award-name">Enrica</div>
+          <div class="award-desc">Premio "Amante del Bacalao" — ha scoperto che la vera specialità basca non è il formaggio</div>
+        </div>
+      </div>
+
+      <div class="final-quote">
+        <p>"I migliori viaggi non si pianificano — si assaporano.<br>Ma avere un buon depliant aiuta comunque."</p>
+        <small>Norte Salvaje · Bilbao · Paesi Baschi · Giugno 2026</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function showDay(n) {
+    document.querySelectorAll('.day-card').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.day-pill').forEach(p => p.classList.remove('active'));
+    document.getElementById('day-' + n).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
