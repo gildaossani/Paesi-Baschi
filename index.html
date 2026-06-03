@@ -7,198 +7,179 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ocean: #0a2540;
-    --ocean-mid: #1a3a5c;
-    --ocean-light: #2d5a8e;
-    --gold: #d4913a;
-    --gold-light: #f0c070;
-    --sand: #f5f0e8;
-    --cream: #fafaf5;
-    --text: #1a1a2e;
-    --muted: #6b7280;
-    --success: #2d6a4f;
-    --warning: #b45309;
-    --nav-h: 64px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+:root{--ocean:#0a2540;--ocean-mid:#1a3a5c;--gold:#d4913a;--gold-light:#f0c070;--sand:#f5f0e8;--cream:#fafaf5;--text:#1a1a2e;--muted:#6b7280;--success:#2d6a4f;--warning:#b45309;--nav-h:64px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);background:var(--ocean);display:flex;align-items:center;padding:0 1.5rem;gap:.25rem;overflow-x:auto;scrollbar-width:none;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+nav::-webkit-scrollbar{display:none}
+.nav-logo{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.1rem;font-weight:700;color:var(--gold-light);white-space:nowrap;margin-right:.75rem}
+.nav-sep{width:1px;height:24px;background:rgba(255,255,255,.15);margin:0 .5rem}
+.nav-btn{background:transparent;border:none;color:rgba(255,255,255,.65);font-family:'DM Sans',-apple-system,sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.5px;padding:.4rem .75rem;border-radius:2rem;cursor:pointer;white-space:nowrap;transition:all .2s;text-transform:uppercase}
+.nav-btn:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-btn.active{color:var(--gold-light);background:rgba(212,145,58,.2)}
+main{padding-top:var(--nav-h)}
+.page{display:none;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.hero{background:linear-gradient(160deg,var(--ocean) 0%,#0d1f3c 50%,#1a0a0a 100%);color:#fff;padding:3.5rem 2rem 3rem;position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-sm{min-height:220px}
+.hero-pat{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(212,145,58,.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(45,90,142,.2) 0%,transparent 50%)}
+.hero-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.75rem;position:relative}
+.hero-title{font-family:'Cormorant Garamond','Georgia',serif;font-size:clamp(3rem,10vw,5.5rem);font-weight:700;line-height:.95;margin-bottom:.5rem;position:relative}
+.hero-title em{color:var(--gold-light);font-style:italic}
+.hero-title-sm{font-size:2.8rem!important}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.65);font-weight:300;margin-bottom:1.5rem;position:relative}
+.hero-quote{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.2rem;font-style:italic;color:var(--gold-light);line-height:1.5;border-left:3px solid var(--gold);padding-left:1rem;max-width:500px;position:relative}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem;position:relative}
+.hero-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:2rem;padding:.3rem .85rem;font-size:.75rem;color:rgba(255,255,255,.8)}
+.hero-dates{display:inline-flex;align-items:center;gap:.75rem;background:rgba(212,145,58,.2);border:1px solid rgba(212,145,58,.4);border-radius:2rem;padding:.45rem 1.1rem;font-size:.8rem;color:var(--gold-light);font-weight:500;margin-top:1rem;position:relative}
+.sec{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem}
+.sec-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.3rem}
+.sec-title{font-family:'Cormorant Garamond','Georgia',serif;font-size:2rem;font-weight:700;color:var(--ocean);margin-bottom:1.25rem;line-height:1.2}
+.sec-text{font-size:.92rem;line-height:1.8;color:#3a3a4a}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.875rem}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.875rem}
+.card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1rem;padding:1.25rem;font-size:.87rem;line-height:1.65;color:#3a3a4a}
+.card-title{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.05rem;font-weight:700;color:var(--ocean);margin-bottom:.4rem}
+.infobox{background:var(--ocean);color:#fff;border-radius:1rem;padding:1.25rem 1.5rem;font-size:.88rem;line-height:1.7;margin:1rem 0}
+.infobox strong{color:var(--gold-light)}
+.alert{border-left:4px solid var(--gold);background:#fffbf0;border-radius:0 .75rem .75rem 0;padding:.85rem 1.1rem;font-size:.85rem;line-height:1.6;color:#5a3a00;margin:.75rem 0}
+.alert strong{color:#3a2000}
+.sbox{border-left:4px solid var(--success);background:#f0f8f4;border-radius:0 .75rem .75rem 0;padding:.85rem 1.1rem;font-size:.85rem;line-height:1.6;color:#1a4a2e;margin:.75rem 0}
+.twrap{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{background:var(--ocean);color:#fff;padding:.65rem .9rem;text-align:left;font-weight:600;font-size:.78rem}
+th:first-child{border-radius:.5rem 0 0 0}
+th:last-child{border-radius:0 .5rem 0 0}
+td{padding:.65rem .9rem;border-bottom:1px solid rgba(0,0,0,.05);color:#3a3a4a;vertical-align:top;line-height:1.5}
+tr:nth-child(even) td{background:rgba(10,37,64,.025)}
+tr:last-child td{border-bottom:none}
+.divider{height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3;margin:0}
+.day-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.day-pill{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:2rem;padding:.4rem .9rem;font-size:.78rem;cursor:pointer;transition:all .2s;font-weight:500;color:var(--muted)}
+.day-pill:hover{border-color:var(--ocean);color:var(--ocean)}
+.day-pill.active{background:var(--ocean);border-color:var(--ocean);color:#fff}
+.day-pill.bday{border-color:var(--gold);color:var(--warning)}
+.day-pill.bday.active{background:var(--gold);border-color:var(--gold);color:#fff}
+.day-card{display:none}
+.day-card.active{display:block;animation:fadeIn .2s ease}
+.day-hdr{background:var(--ocean);color:#fff;border-radius:1rem 1rem 0 0;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
+.day-num{font-family:'Cormorant Garamond','Georgia',serif;font-size:3rem;font-weight:700;line-height:1;color:var(--gold);min-width:50px}
+.day-tb h3{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.4rem;font-weight:700;line-height:1.2}
+.day-tb span{font-size:.78rem;color:rgba(255,255,255,.6)}
+.bday-badge{background:linear-gradient(135deg,var(--gold),#e8b040);color:#fff;border-radius:2rem;padding:.3rem .9rem;font-size:.78rem;font-weight:600;margin-left:auto}
+.day-body{background:#fff;border:1px solid rgba(0,0,0,.07);border-top:none;border-radius:0 0 1rem 1rem;padding:1.5rem}
+.day-wx{display:inline-flex;align-items:center;gap:.5rem;background:#e8f4fd;border-radius:2rem;padding:.35rem .9rem;font-size:.8rem;color:#1a5a8a;margin-bottom:1.1rem}
+.dr{display:flex;gap:.75rem;align-items:flex-start;margin-bottom:.65rem;font-size:.88rem;line-height:1.65;color:#3a3a4a}
+.dri{min-width:22px;font-size:1rem;margin-top:1px}
+.dtip{background:#f0f8f0;border-left:3px solid #4caf50;border-radius:0 .5rem .5rem 0;padding:.6rem .9rem;font-size:.82rem;color:#1a4a1a;margin-top:.75rem;line-height:1.5}
+.dfood{background:#fffbf0;border-left:3px solid var(--gold);border-radius:0 .5rem .5rem 0;padding:.6rem .9rem;font-size:.82rem;color:#5a3a00;margin-top:.5rem;line-height:1.5}
+.dspec{background:linear-gradient(135deg,#fff8ee,#fff3dd);border:1px solid rgba(212,145,58,.3);border-radius:.75rem;padding:.9rem 1.1rem;font-size:.85rem;color:#5a3a00;margin-top:.75rem;line-height:1.5}
+.flt-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1rem;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.flt-time{font-family:'Cormorant Garamond','Georgia',serif;font-size:2rem;font-weight:700;color:var(--ocean);min-width:60px}
+.flt-apt{font-size:.75rem;color:var(--muted);margin-top:2px}
+.flt-arr{font-size:1rem;color:var(--gold);flex:1;text-align:center}
+.flt-info{font-size:.82rem;color:#4a4a5a}
+.badge{display:inline-block;background:var(--ocean);color:var(--gold-light);border-radius:.35rem;padding:.2rem .55rem;font-size:.75rem;font-weight:600;letter-spacing:.5px}
+.pcard{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1rem;padding:1.1rem;text-align:center}
+.av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff;margin:0 auto .6rem}
+.pname{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.1rem;font-weight:700;color:var(--ocean);margin-bottom:.3rem}
+.pbio{font-size:.78rem;color:#5a5a6a;line-height:1.45}
+.cl{list-style:none}
+.cl li{padding:.45rem 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.87rem;color:#3a3a4a;display:flex;gap:.6rem;align-items:flex-start;line-height:1.5}
+.cl li:last-child{border-bottom:none}
+.cl li::before{content:'□';color:var(--ocean);font-size:.9rem;flex-shrink:0;margin-top:1px}
+.isl{background:linear-gradient(135deg,#0a2540,#1a3a5c);color:#fff;border-radius:1.25rem;padding:1.75rem;margin:1.25rem 0;position:relative;overflow:hidden}
+.isl::before{content:'🏝️';position:absolute;right:1.5rem;bottom:1rem;font-size:4rem;opacity:.15}
+.isl h3{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.4rem;font-weight:700;margin-bottom:.5rem}
+.isl p{font-size:.87rem;line-height:1.65;color:rgba(255,255,255,.82)}
+.isl-det{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
+.isl-pill{background:rgba(212,145,58,.25);border:1px solid rgba(212,145,58,.4);border-radius:2rem;padding:.3rem .85rem;font-size:.78rem;color:var(--gold-light);font-weight:500}
+.bday-card{background:linear-gradient(135deg,#8b1a1a,#6b0f0f);color:#fff;border-radius:1.25rem;padding:1.75rem;margin:1.25rem 0;text-align:center}
+.bday-card h3{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.8rem;font-style:italic;margin-bottom:.5rem;color:var(--gold-light)}
+.bday-card p{font-size:.9rem;color:rgba(255,255,255,.82);line-height:1.65}
+.fun-bg{background:linear-gradient(135deg,var(--ocean) 0%,#0d1f3c 100%);border-radius:1.25rem;padding:2.5rem 2rem;color:#fff;margin-top:1.25rem}
+.fun-motto{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.6rem;font-style:italic;color:var(--gold-light);text-align:center;margin-bottom:2rem;line-height:1.4}
+.rule{background:rgba(255,255,255,.07);border-left:3px solid var(--gold);border-radius:0 .5rem .5rem 0;padding:.7rem 1rem;font-size:.85rem;margin-bottom:.5rem;line-height:1.5;color:rgba(255,255,255,.88)}
+.aw-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:.875rem;padding:1rem;text-align:center;font-size:.82rem}
+.aw-em{font-size:1.5rem;display:block;margin-bottom:.35rem}
+.aw-nm{font-weight:600;color:var(--gold-light);margin-bottom:.25rem;font-size:.88rem}
+.aw-ds{color:rgba(255,255,255,.68);line-height:1.4}
+.sub-lbl{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;margin:1.5rem 0 .75rem}
+.fq{text-align:center;border-top:1px solid rgba(255,255,255,.12);padding-top:1.5rem;margin-top:1.5rem}
+.fq p{font-family:'Cormorant Garamond','Georgia',serif;font-style:italic;color:var(--gold-light);font-size:1.15rem;line-height:1.6}
+.fq small{font-size:.72rem;color:rgba(255,255,255,.35);letter-spacing:1px;margin-top:.5rem;display:block}
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    height: var(--nav-h); background: var(--ocean);
-    display: flex; align-items: center; padding: 0 1.5rem; gap: 0.25rem;
-    overflow-x: auto; scrollbar-width: none; box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-  }
-  nav::-webkit-scrollbar { display: none; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold-light); white-space: nowrap; margin-right: 0.75rem; letter-spacing: 0.5px; }
-  .nav-sep { width: 1px; height: 24px; background: rgba(255,255,255,0.15); margin: 0 0.5rem; }
-  .nav-btn { background: transparent; border: none; color: rgba(255,255,255,0.65); font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.5px; padding: 0.4rem 0.75rem; border-radius: 2rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; text-transform: uppercase; }
-  .nav-btn:hover { color: white; background: rgba(255,255,255,0.1); }
-  .nav-btn.active { color: var(--gold-light); background: rgba(212,145,58,0.2); }
+/* PLACE CARDS with photos */
+.place-section{margin-bottom:2.5rem}
+.place-section-title{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.5rem;font-weight:700;color:var(--ocean);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--sand)}
+.place-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1rem;overflow:hidden;margin-bottom:1.25rem;transition:box-shadow .2s}
+.place-card:hover{box-shadow:0 4px 20px rgba(10,37,64,.1)}
+.place-img{width:100%;height:220px;object-fit:cover;display:block}
+.place-img-wrap{position:relative;height:220px;overflow:hidden;background:#e8e8e8}
+.place-img-wrap img{width:100%;height:100%;object-fit:cover}
+.place-body{padding:1.25rem 1.5rem}
+.place-name{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.3rem;font-weight:700;color:var(--ocean);margin-bottom:.4rem}
+.place-badges{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
+.pbadge{display:inline-block;border-radius:1rem;padding:.2rem .65rem;font-size:.72rem;font-weight:600}
+.pbadge-must{background:rgba(212,145,58,.15);color:var(--warning)}
+.pbadge-free{background:#d4edda;color:#155724}
+.pbadge-book{background:#d1ecf1;color:#0c5460}
+.place-desc{font-size:.88rem;line-height:1.7;color:#3a3a4a;margin-bottom:.75rem}
+.place-tips{background:var(--sand);border-radius:.75rem;padding:.75rem 1rem;font-size:.82rem;line-height:1.6;color:#5a4a2a}
+.maps-btn{display:inline-flex;align-items:center;gap:.35rem;background:var(--ocean);color:#fff;border:none;border-radius:1.5rem;padding:.35rem .85rem;font-size:.75rem;font-weight:600;cursor:pointer;text-decoration:none;margin-top:.75rem;transition:background .2s}
+.maps-btn:hover{background:var(--ocean-mid)}
+.place-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
 
-  main { padding-top: var(--nav-h); }
-  .page { display: none; animation: fadeIn 0.3s ease; }
-  .page.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* CITY TABS */
+.city-tab-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.75rem}
+.city-tab{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:2rem;padding:.45rem 1rem;font-size:.8rem;cursor:pointer;transition:all .2s;font-weight:500;color:var(--muted)}
+.city-tab:hover{border-color:var(--ocean);color:var(--ocean)}
+.city-tab.active{background:var(--ocean);border-color:var(--ocean);color:#fff}
+.city-panel{display:none}
+.city-panel.active{display:block;animation:fadeIn .2s ease}
+.city-intro{font-size:.88rem;color:#5a5a6a;line-height:1.65;margin-bottom:1.5rem;background:var(--sand);border-radius:.875rem;padding:1rem 1.25rem}
 
-  .hero { background: linear-gradient(160deg, var(--ocean) 0%, #0d1f3c 50%, #1a0a0a 100%); color: white; padding: 3.5rem 2rem 3rem; position: relative; overflow: hidden; min-height: 420px; display: flex; flex-direction: column; justify-content: flex-end; }
-  .hero-sm { min-height: 220px; }
-  .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 50%, rgba(212,145,58,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(45,90,142,0.2) 0%, transparent 50%); }
-  .hero-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.75rem; position: relative; }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 700; line-height: 0.95; margin-bottom: 0.5rem; position: relative; }
-  .hero-title em { color: var(--gold-light); font-style: italic; }
-  .hero-title-sm { font-size: 2.8rem !important; }
-  .hero-sub { font-size: 0.95rem; color: rgba(255,255,255,0.65); font-weight: 300; margin-bottom: 1.5rem; position: relative; }
-  .hero-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--gold-light); line-height: 1.5; border-left: 3px solid var(--gold); padding-left: 1rem; max-width: 500px; position: relative; }
-  .hero-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; position: relative; }
-  .hero-chip { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 2rem; padding: 0.3rem 0.85rem; font-size: 0.75rem; color: rgba(255,255,255,0.8); }
-  .hero-dates { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(212,145,58,0.2); border: 1px solid rgba(212,145,58,0.4); border-radius: 2rem; padding: 0.45rem 1.1rem; font-size: 0.8rem; color: var(--gold-light); font-weight: 500; margin-top: 1rem; position: relative; }
+/* RESTAURANT CARDS */
+.rc{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1rem;padding:1.25rem 1.5rem;margin-bottom:1rem;transition:all .2s}
+.rc:hover{box-shadow:0 4px 20px rgba(10,37,64,.08);transform:translateY(-1px)}
+.rc-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.6rem;flex-wrap:wrap}
+.rc-name{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.2rem;font-weight:700;color:var(--ocean)}
+.rc-badges{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.rb{display:inline-block;border-radius:1rem;padding:.2rem .6rem;font-size:.7rem;font-weight:600;letter-spacing:.3px;white-space:nowrap}
+.rb-type{background:rgba(212,145,58,.15);color:var(--warning)}
+.rb-star{background:#fff3cd;color:#856404}
+.rb-best{background:#d4edda;color:#155724}
+.rc-addr{font-size:.8rem;color:var(--muted);margin-bottom:.5rem}
+.rc-desc{font-size:.87rem;line-height:1.65;color:#3a3a4a;margin-bottom:.6rem}
+.rc-specs{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.rc-spec{background:var(--sand);border-radius:1rem;padding:.2rem .6rem;font-size:.75rem;color:#5a4a2a;font-weight:500}
+.rc-note{font-size:.8rem;color:var(--warning);font-style:italic;margin-top:.5rem}
 
-  .sec { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem; }
-  .sec-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.3rem; }
-  .sec-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--ocean); margin-bottom: 1.25rem; line-height: 1.2; }
-  .sec-text { font-size: 0.92rem; line-height: 1.8; color: #3a3a4a; }
-
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.875rem; }
-  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.875rem; }
-
-  .card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 1rem; padding: 1.25rem; font-size: 0.87rem; line-height: 1.65; color: #3a3a4a; }
-  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: var(--ocean); margin-bottom: 0.4rem; }
-
-  .infobox { background: var(--ocean); color: white; border-radius: 1rem; padding: 1.25rem 1.5rem; font-size: 0.88rem; line-height: 1.7; margin: 1rem 0; }
-  .infobox strong { color: var(--gold-light); }
-
-  .alert { border-left: 4px solid var(--gold); background: #fffbf0; border-radius: 0 0.75rem 0.75rem 0; padding: 0.85rem 1.1rem; font-size: 0.85rem; line-height: 1.6; color: #5a3a00; margin: 0.75rem 0; }
-  .alert strong { color: #3a2000; }
-  .success-box { border-left: 4px solid var(--success); background: #f0f8f4; border-radius: 0 0.75rem 0.75rem 0; padding: 0.85rem 1.1rem; font-size: 0.85rem; line-height: 1.6; color: #1a4a2e; margin: 0.75rem 0; }
-
-  .table-wrap { overflow-x: auto; margin: 1rem 0; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  th { background: var(--ocean); color: white; padding: 0.65rem 0.9rem; text-align: left; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.3px; }
-  th:first-child { border-radius: 0.5rem 0 0 0; }
-  th:last-child { border-radius: 0 0.5rem 0 0; }
-  td { padding: 0.65rem 0.9rem; border-bottom: 1px solid rgba(0,0,0,0.05); color: #3a3a4a; vertical-align: top; line-height: 1.5; }
-  tr:nth-child(even) td { background: rgba(10,37,64,0.025); }
-  tr:last-child td { border-bottom: none; }
-
-  .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; margin: 0; }
-
-  .day-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .day-pill { background: white; border: 1px solid rgba(0,0,0,0.1); border-radius: 2rem; padding: 0.4rem 0.9rem; font-size: 0.78rem; cursor: pointer; transition: all 0.2s; font-weight: 500; color: var(--muted); }
-  .day-pill:hover { border-color: var(--ocean); color: var(--ocean); }
-  .day-pill.active { background: var(--ocean); border-color: var(--ocean); color: white; }
-  .day-pill.birthday { border-color: var(--gold); color: var(--warning); }
-  .day-pill.birthday.active { background: var(--gold); border-color: var(--gold); color: white; }
-
-  .day-card { display: none; }
-  .day-card.active { display: block; animation: fadeIn 0.2s ease; }
-
-  .day-header { background: var(--ocean); color: white; border-radius: 1rem 1rem 0 0; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
-  .day-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; line-height: 1; color: var(--gold); min-width: 50px; }
-  .day-title-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
-  .day-title-block span { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
-  .day-birthday-badge { background: linear-gradient(135deg, var(--gold), #e8b040); color: white; border-radius: 2rem; padding: 0.3rem 0.9rem; font-size: 0.78rem; font-weight: 600; margin-left: auto; }
-
-  .day-body { background: white; border: 1px solid rgba(0,0,0,0.07); border-top: none; border-radius: 0 0 1rem 1rem; padding: 1.5rem; }
-  .day-weather { display: inline-flex; align-items: center; gap: 0.5rem; background: #e8f4fd; border-radius: 2rem; padding: 0.35rem 0.9rem; font-size: 0.8rem; color: #1a5a8a; margin-bottom: 1.1rem; }
-  .day-row { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 0.65rem; font-size: 0.88rem; line-height: 1.65; color: #3a3a4a; }
-  .day-row-icon { min-width: 22px; font-size: 1rem; margin-top: 1px; }
-  .day-tip { background: #f0f8f0; border-left: 3px solid #4caf50; border-radius: 0 0.5rem 0.5rem 0; padding: 0.6rem 0.9rem; font-size: 0.82rem; color: #1a4a1a; margin-top: 0.75rem; line-height: 1.5; }
-  .day-food { background: #fffbf0; border-left: 3px solid var(--gold); border-radius: 0 0.5rem 0.5rem 0; padding: 0.6rem 0.9rem; font-size: 0.82rem; color: #5a3a00; margin-top: 0.5rem; line-height: 1.5; }
-  .day-special { background: linear-gradient(135deg, #fff8ee, #fff3dd); border: 1px solid rgba(212,145,58,0.3); border-radius: 0.75rem; padding: 0.9rem 1.1rem; font-size: 0.85rem; color: #5a3a00; margin-top: 0.75rem; line-height: 1.5; }
-
-  .flight-card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 1rem; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
-  .flight-time { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--ocean); min-width: 60px; }
-  .flight-apt { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
-  .flight-arrow { font-size: 1rem; color: var(--gold); flex: 1; text-align: center; }
-  .flight-info { font-size: 0.82rem; color: #4a4a5a; }
-  .badge { display: inline-block; background: var(--ocean); color: var(--gold-light); border-radius: 0.35rem; padding: 0.2rem 0.55rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; }
-
-  .person-card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 1rem; padding: 1.1rem; text-align: center; }
-  .avatar { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: white; margin: 0 auto 0.6rem; }
-  .person-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--ocean); margin-bottom: 0.3rem; }
-  .person-bio { font-size: 0.78rem; color: #5a5a6a; line-height: 1.45; }
-
-  .checklist { list-style: none; }
-  .checklist li { padding: 0.45rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.87rem; color: #3a3a4a; display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
-  .checklist li:last-child { border-bottom: none; }
-  .checklist li::before { content: '□'; color: var(--ocean); font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
-
-  .island-card { background: linear-gradient(135deg, #0a2540, #1a3a5c); color: white; border-radius: 1.25rem; padding: 1.75rem; margin: 1.25rem 0; position: relative; overflow: hidden; }
-  .island-card::before { content: '🏝️'; position: absolute; right: 1.5rem; bottom: 1rem; font-size: 4rem; opacity: 0.15; }
-  .island-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .island-card p { font-size: 0.87rem; line-height: 1.65; color: rgba(255,255,255,0.82); }
-  .island-detail { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
-  .island-pill { background: rgba(212,145,58,0.25); border: 1px solid rgba(212,145,58,0.4); border-radius: 2rem; padding: 0.3rem 0.85rem; font-size: 0.78rem; color: var(--gold-light); font-weight: 500; }
-
-  .bday-card { background: linear-gradient(135deg, #8b1a1a, #6b0f0f); color: white; border-radius: 1.25rem; padding: 1.75rem; margin: 1.25rem 0; text-align: center; }
-  .bday-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-style: italic; margin-bottom: 0.5rem; color: var(--gold-light); }
-  .bday-card p { font-size: 0.9rem; color: rgba(255,255,255,0.82); line-height: 1.65; }
-
-  .fun-bg { background: linear-gradient(135deg, var(--ocean) 0%, #0d1f3c 100%); border-radius: 1.25rem; padding: 2.5rem 2rem; color: white; margin-top: 1.25rem; }
-  .fun-motto { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: var(--gold-light); text-align: center; margin-bottom: 2rem; line-height: 1.4; }
-  .rule { background: rgba(255,255,255,0.07); border-left: 3px solid var(--gold); border-radius: 0 0.5rem 0.5rem 0; padding: 0.7rem 1rem; font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; color: rgba(255,255,255,0.88); }
-  .award-card-fun { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 0.875rem; padding: 1rem; text-align: center; font-size: 0.82rem; }
-  .award-emoji { font-size: 1.5rem; display: block; margin-bottom: 0.35rem; }
-  .award-name { font-weight: 600; color: var(--gold-light); margin-bottom: 0.25rem; font-size: 0.88rem; }
-  .award-desc { color: rgba(255,255,255,0.68); line-height: 1.4; }
-  .sub-label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); text-align: center; margin: 1.5rem 0 0.75rem; }
-  .final-quote { text-align: center; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; margin-top: 1.5rem; }
-  .final-quote p { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold-light); font-size: 1.15rem; line-height: 1.6; }
-  .final-quote small { font-size: 0.72rem; color: rgba(255,255,255,0.35); letter-spacing: 1px; margin-top: 0.5rem; display: block; }
-
-  @media (max-width: 480px) {
-    .hero { padding: 2.5rem 1.25rem 2rem; }
-    .sec { padding: 2rem 1.1rem; }
-    .hero-title { font-size: 2.6rem; }
-    .grid-3 { grid-template-columns: repeat(2, 1fr); }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .flight-card { flex-direction: column; }
-  }
-
-  /* RESTAURANT STYLES */
-  .city-tab-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
-  .city-tab { background: white; border: 1px solid rgba(0,0,0,0.1); border-radius: 2rem; padding: 0.45rem 1rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; font-weight: 500; color: var(--muted); }
-  .city-tab:hover { border-color: var(--ocean); color: var(--ocean); }
-  .city-tab.active { background: var(--ocean); border-color: var(--ocean); color: white; }
-  .city-panel { display: none; }
-  .city-panel.active { display: block; animation: fadeIn 0.2s ease; }
-  .resto-card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 1rem; padding: 1.25rem 1.5rem; margin-bottom: 1rem; position: relative; }
-  .resto-card:hover { box-shadow: 0 4px 20px rgba(10,37,64,0.08); transform: translateY(-1px); transition: all 0.2s; }
-  .resto-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
-  .resto-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--ocean); }
-  .resto-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
-  .resto-badge { display: inline-block; border-radius: 1rem; padding: 0.2rem 0.6rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3px; white-space: nowrap; }
-  .badge-price { background: rgba(10,37,64,0.08); color: var(--ocean); }
-  .badge-type { background: rgba(212,145,58,0.15); color: var(--warning); }
-  .badge-star { background: #fff3cd; color: #856404; }
-  .badge-best { background: #d4edda; color: #155724; }
-  .resto-address { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
-  .resto-desc { font-size: 0.87rem; line-height: 1.65; color: #3a3a4a; margin-bottom: 0.6rem; }
-  .resto-specials { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
-  .resto-special { background: var(--sand); border-radius: 1rem; padding: 0.2rem 0.6rem; font-size: 0.75rem; color: #5a4a2a; font-weight: 500; }
-  .resto-note { font-size: 0.8rem; color: var(--warning); font-style: italic; margin-top: 0.5rem; }
-  .maps-btn { display: inline-flex; align-items: center; gap: 0.35rem; background: var(--ocean); color: white; border: none; border-radius: 1.5rem; padding: 0.35rem 0.85rem; font-size: 0.75rem; font-weight: 600; cursor: pointer; text-decoration: none; margin-top: 0.6rem; transition: background 0.2s; }
-  .maps-btn:hover { background: var(--ocean-light); }
-  .city-intro { font-size: 0.88rem; color: #5a5a6a; line-height: 1.65; margin-bottom: 1.5rem; background: var(--sand); border-radius: 0.875rem; padding: 1rem 1.25rem; }
-
+@media(max-width:480px){
+  .hero{padding:2.5rem 1.25rem 2rem}
+  .sec{padding:2rem 1.1rem}
+  .hero-title{font-size:2.6rem}
+  .g3{grid-template-columns:repeat(2,1fr)}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .flt-card{flex-direction:column}
+  .place-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-
 <nav>
   <span class="nav-logo">Norte Salvaje ✦</span>
   <div class="nav-sep"></div>
   <button class="nav-btn active" onclick="showPage('home',this)">Home</button>
   <button class="nav-btn" onclick="showPage('gruppo',this)">Gruppo</button>
   <button class="nav-btn" onclick="showPage('programma',this)">Programma</button>
+  <button class="nav-btn" onclick="showPage('cosadavedere',this)">🗺️ Cosa vedere</button>
+  <button class="nav-btn" onclick="showPage('ristoranti',this)">🍽️ Ristoranti</button>
   <button class="nav-btn" onclick="showPage('logistica',this)">Voli & Auto</button>
   <button class="nav-btn" onclick="showPage('alloggio',this)">Alloggio</button>
   <button class="nav-btn" onclick="showPage('food',this)">Food</button>
-  <button class="nav-btn" onclick="showPage('ristoranti',this)">🍽️ Ristoranti</button>
-  <button class="nav-btn" onclick="showPage('esperienze',this)">Esperienze</button>
   <button class="nav-btn" onclick="showPage('valigia',this)">Valigia</button>
   <button class="nav-btn" onclick="showPage('note',this)">Note utili</button>
   <button class="nav-btn" onclick="showPage('fun',this)">Fun!</button>
@@ -209,7 +190,7 @@
 <!-- HOME -->
 <div id="page-home" class="page active">
   <div class="hero">
-    <div class="hero-pattern"></div>
+    <div class="hero-pat"></div>
     <div class="hero-tag">✈ Depliant di viaggio · Estate 2026</div>
     <h1 class="hero-title">Norte<br><em>Salvaje</em></h1>
     <p class="hero-sub">7 giorni nei Paesi Baschi — la Spagna che non ti aspetti</p>
@@ -228,51 +209,46 @@
   <div class="sec">
     <div class="sec-label">Il viaggio in breve</div>
     <h2 class="sec-title">La nostra avventura basca</h2>
-    <p class="sec-text">Sette giorni nella Spagna del Nord più autentica. Base fissa a <strong>Bilbao</strong>, appartamento con 3 camere per 6 persone. Ogni giorno una destinazione diversa lungo la costa basca, con l'auto. Ritmo rilassato: una gita al giorno, pause abbondanti, pintxos obbligatori.</p>
-    <div class="grid-4" style="margin-top:1.25rem;">
+    <p class="sec-text">Sette giorni nella Spagna del Nord più autentica. Base fissa a <strong>Bilbao</strong>, appartamento con 3 camere per 6 persone. Ogni giorno una destinazione diversa lungo la costa basca. Ritmo rilassato: una gita al giorno, pause abbondanti, pintxos obbligatori.</p>
+    <div class="g4" style="margin-top:1.25rem">
       <div class="card"><div class="card-title">📍 Base</div>Airbnb Bilbao · 3 camere · check-in 24h · metro 3 min</div>
       <div class="card"><div class="card-title">🚗 Mobilità</div>Renault Espace 7 posti A/C · in città a piedi o metro</div>
       <div class="card"><div class="card-title">🌡️ Clima</div>20–25°C di giorno · 15–18°C sera · possibile pioggia</div>
       <div class="card"><div class="card-title">🎭 Stile</div>Rilassato · goloso · curioso · meglio meno e bene</div>
     </div>
-    <div class="divider" style="margin:2rem 0;"></div>
+    <div class="divider" style="margin:2rem 0"></div>
     <div class="sec-label">Le tappe</div>
     <h2 class="sec-title">Dove andiamo</h2>
-    <div class="grid-3">
-      <div class="card" style="border-top:3px solid var(--ocean);"><div class="card-title">🏙️ Bilbao</div>Base + Guggenheim + free tour + Casco Viejo. Due giorni pieni in città.</div>
-      <div class="card" style="border-top:3px solid var(--gold);"><div class="card-title">🎂 Getxo · 19 giugno</div>Compleanno Silvia! Ponte di Vizcaya UNESCO + cena speciale.</div>
-      <div class="card" style="border-top:3px solid #2d6a4f;"><div class="card-title">🌿 Urdaibai · 20 giugno</div>Riserva biosfera + Bermeo porto pescatori + Mundaka surf.</div>
-      <div class="card" style="border-top:3px solid #8b1a1a;"><div class="card-title">🏝️ Gaztelugatxe + Lekeitio · 21</div>231 gradini sull'oceano + Isla San Nicolás a piedi con la bassa marea.</div>
-      <div class="card" style="border-top:3px solid #6a0dad;"><div class="card-title">🍢 San Sebastián · 22</div>Pintxos + La Concha + Isla Santa Clara in traghetto.</div>
-      <div class="card" style="border-top:3px solid #1a6a8a;"><div class="card-title">🌊 Zumaia + Getaria · 23</div>Flysch geologico + borgo natale di Balenciaga. Poi rientro a Bilbao.</div>
+    <div class="g3">
+      <div class="card" style="border-top:3px solid var(--ocean)"><div class="card-title">🏙️ Bilbao</div>Base + Guggenheim + free tour + Casco Viejo.</div>
+      <div class="card" style="border-top:3px solid var(--gold)"><div class="card-title">🎂 Getxo · 19 giugno</div>Compleanno Silvia! Ponte di Vizcaya UNESCO.</div>
+      <div class="card" style="border-top:3px solid #2d6a4f"><div class="card-title">🌿 Urdaibai · 20 giugno</div>Riserva biosfera + Bermeo + Mundaka surf.</div>
+      <div class="card" style="border-top:3px solid #8b1a1a"><div class="card-title">🏝️ Gaztelugatxe + Lekeitio · 21</div>231 gradini + Isla San Nicolás a piedi.</div>
+      <div class="card" style="border-top:3px solid #6a0dad"><div class="card-title">🍢 San Sebastián · 22</div>Pintxos + La Concha + Isla Santa Clara.</div>
+      <div class="card" style="border-top:3px solid #1a6a8a"><div class="card-title">🌊 Zumaia + Getaria · 23</div>Flysch + borgo natale di Balenciaga.</div>
     </div>
   </div>
 </div>
 
 <!-- GRUPPO -->
 <div id="page-gruppo" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 02</div>
-    <h1 class="hero-title hero-title-sm">Il <em>Gruppo</em></h1>
-    <p class="hero-sub">6 italiani alla conquista dei Paesi Baschi</p>
-  </div>
+  <div class="hero hero-sm"><div class="hero-pat"></div><div class="hero-tag">Sezione 02</div><h1 class="hero-title hero-title-sm">Il <em>Gruppo</em></h1><p class="hero-sub">6 italiani alla conquista dei Paesi Baschi</p></div>
   <div class="sec">
-    <div class="grid-3">
-      <div class="person-card"><div class="avatar" style="background:#1a3a5c;">SI</div><div class="person-name">Silvia</div><div class="person-bio">La mente organizzativa. Ha prenotato tutto e fatto il depliant. Il 19 giugno è il suo compleanno 🎂</div></div>
-      <div class="person-card"><div class="avatar" style="background:#8b4513;">SA</div><div class="person-name">Sandro</div><div class="person-bio">Marito e pilota ufficiale. Intestatario dell'auto. Deve stampare il voucher DoYouSpain. Obbligatorio.</div></div>
-      <div class="person-card"><div class="avatar" style="background:#6a5acd;">EV</div><div class="person-name">Eva</div><div class="person-bio">16 anni. Energia infinita — spiagge, oceano, avventure. Prima a tuffarsi a La Concha, garantito.</div></div>
-      <div class="person-card"><div class="avatar" style="background:#2e8b57;">LO</div><div class="person-name">Lorenzo</div><div class="person-bio">18 anni. Esperto di Game of Thrones — a Gaztelugatxe avrà il suo momento di gloria.</div></div>
-      <div class="person-card"><div class="avatar" style="background:#b8860b;">EM</div><div class="person-name">Emilio</div><div class="person-bio">Amico di viaggio. Sommelier del txakoli non ufficiale. Garante della qualità gastronomica del gruppo.</div></div>
-      <div class="person-card"><div class="avatar" style="background:#c06080;">EN</div><div class="person-name">Enrica</div><div class="person-bio">Amante del relax. Pintxos e pesce sì, grazie. Formaggi assolutamente no — non chiedetele.</div></div>
+    <div class="g3">
+      <div class="pcard"><div class="av" style="background:#1a3a5c">SI</div><div class="pname">Silvia</div><div class="pbio">La mente organizzativa. Ha prenotato tutto e fatto il depliant. Il 19 giugno è il suo compleanno 🎂</div></div>
+      <div class="pcard"><div class="av" style="background:#8b4513">SA</div><div class="pname">Sandro</div><div class="pbio">Marito e pilota ufficiale. Deve stampare il voucher DoYouSpain prima di partire.</div></div>
+      <div class="pcard"><div class="av" style="background:#6a5acd">EV</div><div class="pname">Eva</div><div class="pbio">16 anni. Energia infinita — spiagge, oceano, avventure. Prima a tuffarsi ovunque.</div></div>
+      <div class="pcard"><div class="av" style="background:#2e8b57">LO</div><div class="pname">Lorenzo</div><div class="pbio">18 anni. Fan di Game of Thrones — a Gaztelugatxe avrà il suo momento di gloria.</div></div>
+      <div class="pcard"><div class="av" style="background:#b8860b">EM</div><div class="pname">Emilio</div><div class="pbio">Amico di viaggio. Sommelier del txakoli non ufficiale e garante gastronomico.</div></div>
+      <div class="pcard"><div class="av" style="background:#c06080">EN</div><div class="pname">Enrica</div><div class="pbio">Amante del relax. Pintxos e pesce sì. Formaggi assolutamente no — non chiedetele.</div></div>
     </div>
-    <div style="margin-top:2rem;">
+    <div style="margin-top:2rem">
       <div class="sec-label">Da tenere a mente</div>
       <h2 class="sec-title">Abitudini del gruppo</h2>
-      <div class="grid-2">
-        <div class="card"><div class="card-title">⏰ Ritmo</div>Niente alzatacce. Partenza max 9:30–10:00 per le gite. Colazione prima di tutto.</div>
-        <div class="card"><div class="card-title">🚶 Passo</div>Una destinazione al giorno. Pause caffè obbligatorie. Nessuno che trascina nessuno di corsa.</div>
-        <div class="card"><div class="card-title">🍽️ Pasti</div>Budget 15–20€ per i pasti principali. Nessuna allergia. Enrica evita i formaggi.</div>
+      <div class="g2">
+        <div class="card"><div class="card-title">⏰ Ritmo</div>Niente alzatacce. Partenza max 9:30–10:00. Colazione prima di tutto.</div>
+        <div class="card"><div class="card-title">🚶 Passo</div>Una destinazione al giorno. Pause caffè obbligatorie. Nessuno di corsa.</div>
+        <div class="card"><div class="card-title">🍽️ Pasti</div>Nessuna allergia. Enrica evita i formaggi.</div>
         <div class="card"><div class="card-title">🎯 Filosofia</div>Meglio meno ma bene. Un posto ben vissuto vale dieci visti di corsa.</div>
       </div>
     </div>
@@ -281,17 +257,12 @@
 
 <!-- PROGRAMMA -->
 <div id="page-programma" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 03</div>
-    <h1 class="hero-title hero-title-sm">Il <em>Programma</em></h1>
-    <p class="hero-sub">Giorno per giorno — suggerimenti, non obblighi</p>
-  </div>
+  <div class="hero hero-sm"><div class="hero-pat"></div><div class="hero-tag">Sezione 03</div><h1 class="hero-title hero-title-sm">Il <em>Programma</em></h1><p class="hero-sub">Giorno per giorno — suggerimenti, non obblighi</p></div>
   <div class="sec">
     <div class="day-nav">
       <button class="day-pill active" onclick="showDay(1,this)">17 · Arrivo</button>
       <button class="day-pill" onclick="showDay(2,this)">18 · Guggenheim</button>
-      <button class="day-pill birthday" onclick="showDay(3,this)">19 🎂 Compleanno</button>
+      <button class="day-pill bday" onclick="showDay(3,this)">19 🎂 Compleanno</button>
       <button class="day-pill" onclick="showDay(4,this)">20 · Urdaibai</button>
       <button class="day-pill" onclick="showDay(5,this)">21 · Gaztelugatxe</button>
       <button class="day-pill" onclick="showDay(6,this)">22 · San Sebastián</button>
@@ -299,777 +270,447 @@
       <button class="day-pill" onclick="showDay(8,this)">24 · Rientro</button>
     </div>
 
-    <!-- G1 -->
     <div class="day-card active" id="day-1">
-      <div class="day-header"><div class="day-num">01</div><div class="day-title-block"><h3>Arrivo a Bilbao</h3><span>Mercoledì 17 giugno · Santander → Bilbao</span></div></div>
+      <div class="day-hdr"><div class="day-num">01</div><div class="day-tb"><h3>Arrivo a Bilbao</h3><span>Mercoledì 17 giugno · Santander → Bilbao</span></div></div>
       <div class="day-body">
-        <div class="day-weather">🌤 20–22°C · Variabile</div>
-        <div class="day-row"><span class="day-row-icon">✈️</span><span><strong>12:05</strong> Decollo da Venezia Treviso (TSF) · Volo FR3603 Ryanair</span></div>
-        <div class="day-row"><span class="day-row-icon">🛬</span><span><strong>14:25</strong> Atterraggio Santander (SDR) · Dirigersi SUBITO all'ufficio OK Mobility nell'area Arrivi — ritiro auto fissato alle 14:30</span></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~14:45</strong> Ritiro Renault Espace · Partenza verso Bilbao (~100 km, 1h15 via A-8)</span></div>
-        <div class="day-row"><span class="day-row-icon">🏠</span><span><strong>~16:30</strong> Check-in Airbnb (dopo le 15:00) · Sistemazione bagagli</span></div>
-        <div class="day-row"><span class="day-row-icon">🚶</span><span><strong>~18:00</strong> Prima passeggiata nel Casco Viejo — Las Siete Calles, Plaza Nueva, orientamento</span></div>
-        <div class="day-row"><span class="day-row-icon">🍷</span><span><strong>~20:00</strong> Aperitivo + primo assaggio di pintxos in Plaza Nueva — battesimo ufficiale</span></div>
-        <div class="alert"><strong>⚠️ Attenzione:</strong> Volo atterra alle 14:25 e ritiro auto è alle 14:30 — niente caffè né soste, dritti all'ufficio OK Mobility nell'area Arrivi.</div>
-        <div class="day-food">🍽️ Cena: Plaza Nueva · Bar Víctor Montes o Café Bar Bilbao · ~15€ a testa</div>
+        <div class="day-wx">🌤 20–22°C · Variabile</div>
+        <div class="dr"><span class="dri">✈️</span><span><strong>12:05</strong> Decollo da Venezia Treviso (TSF) · Volo FR3603</span></div>
+        <div class="dr"><span class="dri">🛬</span><span><strong>14:25</strong> Atterraggio Santander · Dirigersi SUBITO a OK Mobility nell'area Arrivi</span></div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~14:45</strong> Ritiro Renault Espace · Partenza verso Bilbao (~100 km, 1h15)</span></div>
+        <div class="dr"><span class="dri">🏠</span><span><strong>~16:30</strong> Check-in Airbnb dopo le 15:00</span></div>
+        <div class="dr"><span class="dri">🚶</span><span><strong>~18:00</strong> Prima passeggiata nel Casco Viejo — Las Siete Calles, Plaza Nueva</span></div>
+        <div class="dr"><span class="dri">🍷</span><span><strong>~20:00</strong> Aperitivo + primo assaggio di pintxos in Plaza Nueva</span></div>
+        <div class="alert"><strong>⚠️</strong> Il margine tra atterraggio (14:25) e ritiro auto (14:30) è minimo. Niente soste — dritti a OK Mobility.</div>
+        <div class="dfood">🍽️ Cena: Plaza Nueva · Bar Víctor Montes o Café Bar Bilbao</div>
       </div>
     </div>
 
-    <!-- G2 -->
     <div class="day-card" id="day-2">
-      <div class="day-header"><div class="day-num">02</div><div class="day-title-block"><h3>Bilbao — Guggenheim + Free Tour</h3><span>Giovedì 18 giugno · Base Bilbao</span></div></div>
+      <div class="day-hdr"><div class="day-num">02</div><div class="day-tb"><h3>Bilbao — Guggenheim + Free Tour</h3><span>Giovedì 18 giugno · Base Bilbao</span></div></div>
       <div class="day-body">
-        <div class="day-weather">🌤 21–24°C · Soleggiato</div>
-        <div class="day-row"><span class="day-row-icon">🦶</span><span><strong>10:00</strong> Free Walking Tour · guruwalk.com · offerta libera · durata ~2h · Ritrovo vicino al Teatro Arriaga. Prenotate su 2 slot separati (limite gruppi).</span></div>
-        <div class="day-row"><span class="day-row-icon">☕</span><span><strong>~12:30</strong> Pausa caffè e pintxos nel Casco Viejo</span></div>
-        <div class="day-row"><span class="day-row-icon">🌳</span><span><strong>~13:30</strong> Passeggiata al Parco Doña Casilda Iturrizar — il verde al centro di Bilbao, a due passi dal Guggenheim</span></div>
-        <div class="day-row"><span class="day-row-icon">🎨</span><span><strong>15:00</strong> Museo Guggenheim di Frank Gehry — minimo 2 ore. L'edificio in titanio è già di per sé un'opera d'arte. Audioguida inclusa nel biglietto.</span></div>
-        <div class="day-row"><span class="day-row-icon">🌆</span><span><strong>~17:30</strong> Passeggiata sul lungofiume Nervión · zona Abandoibarra · aperitivo con vista</span></div>
-        <div class="day-tip">💡 Guggenheim: ~13€ adulti, riduzioni under 18. Prenotate online su <strong>guggenheim-bilbao.eus</strong> — evitate la fascia 11–13 (la più affollata). No foto all'interno. Portate una giacca leggera: le sale sono fresche.</div>
-        <div class="day-food">🍽️ Cena: sidrería nel Casco Viejo · sidro versato dall'alto + pintxos · 15–18€ a testa</div>
+        <div class="day-wx">🌤 21–24°C · Soleggiato</div>
+        <div class="dr"><span class="dri">🦶</span><span><strong>10:00</strong> Free Walking Tour · guruwalk.com · offerta libera · ~2h · Ritrovo Teatro Arriaga</span></div>
+        <div class="dr"><span class="dri">☕</span><span><strong>~12:30</strong> Pausa caffè e pintxos nel Casco Viejo</span></div>
+        <div class="dr"><span class="dri">🌳</span><span><strong>~13:30</strong> Parco Doña Casilda Iturrizar — il verde di Bilbao, a due passi dal Guggenheim</span></div>
+        <div class="dr"><span class="dri">🎨</span><span><strong>15:00</strong> Museo Guggenheim di Frank Gehry — minimo 2 ore. Audioguida inclusa nel biglietto.</span></div>
+        <div class="dr"><span class="dri">🌆</span><span><strong>~17:30</strong> Passeggiata sul Nervión · zona Abandoibarra · aperitivo con vista</span></div>
+        <div class="dtip">💡 Prenotare online su guggenheim-bilbao.eus — evitate la fascia 11–13 (la più affollata). No foto all'interno. Portate una giacca leggera.</div>
+        <div class="dfood">🍽️ Cena: sidrería nel Casco Viejo · sidro versato dall'alto + pintxos</div>
       </div>
     </div>
 
-    <!-- G3 COMPLEANNO -->
     <div class="day-card" id="day-3">
-      <div class="day-header"><div class="day-num">03</div><div class="day-title-block"><h3>Compleanno Silvia — Getxo + Ponte di Vizcaya</h3><span>Venerdì 19 giugno · Gita vicino a Bilbao</span></div><div class="day-birthday-badge">🎂 Il tuo giorno!</div></div>
+      <div class="day-hdr"><div class="day-num">03</div><div class="day-tb"><h3>Compleanno Silvia — Getxo + Ponte di Vizcaya</h3><span>Venerdì 19 giugno</span></div><div class="bday-badge">🎂 Il tuo giorno!</div></div>
       <div class="day-body">
-        <div class="day-weather">🌞 21–24°C</div>
+        <div class="day-wx">🌞 21–24°C</div>
         <div class="bday-card"><h3>Buon compleanno, Silvia!</h3><p>Un giorno rilassato vicino a Bilbao: il Ponte di Vizcaya è a 20 minuti, Getxo è un borgo elegante affacciato sull'oceano. Niente stress, tanto charme, cena speciale la sera.</p></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~10:30</strong> Partenza verso Getxo (~15 km, 20 min). Si può anche prendere il metro linea 1 da Bilbao.</span></div>
-        <div class="day-row"><span class="day-row-icon">🌊</span><span><strong>~11:00</strong> Passeggiata nel quartiere Las Arenas di Getxo · lungomare con ville Liberty degli anni '20 · spiaggia di Ereaga</span></div>
-        <div class="day-row"><span class="day-row-icon">🌉</span><span><strong>~12:30</strong> <strong>Ponte di Vizcaya (Puente Colgante)</strong> — Patrimonio UNESCO dal 2006. Il solo ponte sospeso traghettante al mondo, costruito nel 1893. Salite sulla passerella superiore per la vista panoramica (~8€).</span></div>
-        <div class="day-row"><span class="day-row-icon">☕</span><span><strong>~14:00</strong> Pranzo o aperitivo a Getxo · zona porto o lungomare</span></div>
-        <div class="day-row"><span class="day-row-icon">🏠</span><span><strong>~16:00</strong> Rientro a Bilbao · pausa relax · preparativi cena</span></div>
-        <div class="day-row"><span class="day-row-icon">🥂</span><span><strong>Sera</strong> Cena di compleanno speciale a Bilbao · zona Ensanche o Casco Viejo</span></div>
-        <div class="day-special">🎉 <strong>Cena di compleanno:</strong> considerate un ristorante con chuletón (costata basca) o un posto di pesce di qualità. Budget extra ~30–40€ a testa — una volta sola, ne vale la pena.</div>
-        <div class="day-food">🍽️ Pranzo leggero a Getxo (~12–15€) · Cena speciale Bilbao (~30–40€)</div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~10:30</strong> Partenza verso Getxo (~15 km, 20 min)</span></div>
+        <div class="dr"><span class="dri">🌊</span><span><strong>~11:00</strong> Lungomare Las Arenas · ville Liberty anni '20 · spiaggia di Ereaga</span></div>
+        <div class="dr"><span class="dri">🌉</span><span><strong>~12:30</strong> Ponte di Vizcaya — Patrimonio UNESCO. Salite sulla passerella superiore per la vista.</span></div>
+        <div class="dr"><span class="dri">☕</span><span><strong>~14:00</strong> Pranzo a Getxo · zona porto o lungomare</span></div>
+        <div class="dr"><span class="dri">🏠</span><span><strong>~16:00</strong> Rientro a Bilbao · pausa relax · preparativi cena</span></div>
+        <div class="dr"><span class="dri">🥂</span><span><strong>Sera</strong> Cena di compleanno speciale a Bilbao · zona Ensanche</span></div>
+        <div class="dspec">🎉 <strong>Cena di compleanno:</strong> considerate un ristorante con chuletón (costata basca) — una volta sola, ne vale la pena.</div>
       </div>
     </div>
 
-    <!-- G4 -->
     <div class="day-card" id="day-4">
-      <div class="day-header"><div class="day-num">04</div><div class="day-title-block"><h3>Urdaibai + Bermeo + Mundaka</h3><span>Sabato 20 giugno · Gita in auto</span></div></div>
+      <div class="day-hdr"><div class="day-num">04</div><div class="day-tb"><h3>Urdaibai + Bermeo + Mundaka</h3><span>Sabato 20 giugno · Gita in auto</span></div></div>
       <div class="day-body">
-        <div class="day-weather">🌤 20–23°C</div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>Partenza 9:30</strong> verso la Riserva della Biosfera di Urdaibai (~40 km, ~45 min)</span></div>
-        <div class="day-row"><span class="day-row-icon">🌿</span><span><strong>~10:30</strong> <strong>Riserva Urdaibai</strong> — zona umida protetta UNESCO, paesaggi selvaggi, birdwatching. Passeggiate nei boschi o sosta panoramica.</span></div>
-        <div class="day-row"><span class="day-row-icon">⚓</span><span><strong>~12:00</strong> <strong>Bermeo</strong> — uno dei più bei porti di pescatori della costa basca. Porto colorato, centro storico, museo del pescatore. Pranzo qui.</span></div>
-        <div class="day-row"><span class="day-row-icon">🏄</span><span><strong>~14:30</strong> <strong>Mundaka</strong> — il borgo del surf basco. La sua onda sinistra è famosa in tutto il mondo. Passeggiata sul lungomare, atmosfera rilassata.</span></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~17:00</strong> Rientro a Bilbao (~45 min)</span></div>
-        <div class="day-tip">💡 Mundaka e Bermeo sono a pochi km l'una dall'altra — facile combinarle. Se avete tempo e voglia, tra Urdaibai e Bermeo c'è anche la Cueva di Santimamiñe con pitture rupestri paleolitiche (prenotazione consigliata).</div>
-        <div class="day-food">🍽️ Pranzo a Bermeo: pesce freschissimo del porto, menù del giorno ~12–15€ · Cena leggera a Bilbao</div>
+        <div class="day-wx">🌤 20–23°C</div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>Partenza 9:30</strong> verso Urdaibai (~40 km, ~45 min)</span></div>
+        <div class="dr"><span class="dri">🌿</span><span><strong>~10:30</strong> Riserva Urdaibai — zona umida protetta UNESCO, paesaggi selvaggi</span></div>
+        <div class="dr"><span class="dri">⚓</span><span><strong>~12:00</strong> Bermeo — porto pescatori, centro storico</span></div>
+        <div class="dr"><span class="dri">🏄</span><span><strong>~14:30</strong> Mundaka — il borgo del surf basco, onda sinistra famosa nel mondo</span></div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~17:00</strong> Rientro a Bilbao (~45 min)</span></div>
+        <div class="dfood">🍽️ Pranzo a Bermeo: pesce fresco sul porto</div>
       </div>
     </div>
 
-    <!-- G5 -->
     <div class="day-card" id="day-5">
-      <div class="day-header"><div class="day-num">05</div><div class="day-title-block"><h3>Gaztelugatxe + Lekeitio + Isla San Nicolás</h3><span>Domenica 21 giugno · Gita in auto</span></div></div>
+      <div class="day-hdr"><div class="day-num">05</div><div class="day-tb"><h3>Gaztelugatxe + Lekeitio + Isla San Nicolás</h3><span>Domenica 21 giugno · Gita in auto</span></div></div>
       <div class="day-body">
-        <div class="day-weather">🌤 20–23°C · Controllate il vento</div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>Partenza 9:00</strong> verso Gaztelugatxe (~35 km, ~45 min). Parcheggio a pagamento vicino al sito.</span></div>
-        <div class="day-row"><span class="day-row-icon">🏔️</span><span><strong>~10:00</strong> <strong>San Juan de Gaztelugatxe</strong> — 231 gradini fino alla cappella sull'isolotto. Panorama sull'Atlantico. Suonate la campana 3 volte! ~1h30 a/r.</span></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~12:00</strong> Partenza verso Lekeitio (~45 min)</span></div>
-
-        <div class="island-card">
+        <div class="day-wx">🌤 20–23°C · Controllate il vento</div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>Partenza 9:00</strong> verso Gaztelugatxe (~35 km, ~45 min)</span></div>
+        <div class="dr"><span class="dri">🏔️</span><span><strong>~10:00</strong> San Juan de Gaztelugatxe — 231 gradini + campana da suonare 3 volte · ~1h30 a/r</span></div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~12:00</strong> Partenza verso Lekeitio (~45 min)</span></div>
+        <div class="isl">
           <h3>🏝️ Isla de San Nicolás — solo con la bassa marea!</h3>
-          <p>Di fronte alla spiaggia principale di Lekeitio c'è questa piccola isola disabitata, raggiungibile a piedi attraverso una passerella di pietra che emerge solo con la bassa marea. Un'esperienza unica. La marea cambia ogni 6 ore — bisogna entrare E uscire entro la finestra di bassa marea.</p>
-          <div class="island-detail">
-            <span class="island-pill">🚶 A piedi con bassa marea</span>
-            <span class="island-pill">⚠️ Max 2h sull'isola</span>
-            <span class="island-pill">📍 Da Playa de Isuntza o Playa Karraspio</span>
-            <span class="island-pill">🌊 Passerella scivolosa — scarpe chiuse</span>
+          <p>Di fronte a Lekeitio. Passerella di pietra muschiosa visibile solo con la bassa marea. Entrate E uscite entro la finestra di bassa marea.</p>
+          <div class="isl-det">
+            <span class="isl-pill">🚶 A piedi · gratis</span>
+            <span class="isl-pill">⏱️ Max 2h sull'isola</span>
+            <span class="isl-pill">⚠️ Passerella scivolosa</span>
+            <span class="isl-pill">🌊 Verificare tideschart.com</span>
           </div>
-          <p style="margin-top:0.75rem; font-size:0.82rem; color:rgba(255,255,255,0.7);">⚠️ <strong>Obbligatorio:</strong> cercate "low tide Lekeitio June 21 2026" su <strong>tideschart.com</strong> o <strong>tide-forecast.com</strong> prima di partire. Organizzate l'arrivo a Lekeitio in modo da coincidere con la bassa marea. Chi resta sull'isola quando sale la marea deve nuotare per tornare.</p>
         </div>
-
-        <div class="day-row"><span class="day-row-icon">🏘️</span><span>Dopo l'isola: passeggiata nel borgo di Lekeitio — porto, basilica gotica dell'Asunción, aperitivo vista mare</span></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~17:30</strong> Rientro a Bilbao (~1h)</span></div>
-        <div class="day-tip">💡 Lorenzo: una citazione a Game of Thrones a Gaztelugatxe è consentita. Una sola. Poi si tace. · Scarpe da camminata per entrambe le isole — la passerella di San Nicolás è coperta di muschio bagnato.</div>
-        <div class="day-food">🍽️ Pranzo a Lekeitio: pesce nel porto, menù del giorno ~12–15€ · Cena a Bilbao</div>
+        <div class="dr"><span class="dri">🏘️</span><span>Dopo l'isola: passeggiata nel borgo di Lekeitio · porto, basilica gotica</span></div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~17:30</strong> Rientro a Bilbao (~1h)</span></div>
+        <div class="dtip">💡 Lorenzo: una citazione a GoT a Gaztelugatxe — una sola. Scarpe con suola antiscivolo per San Nicolás.</div>
+        <div class="dfood">🍽️ Pranzo a Lekeitio: pesce sul porto</div>
       </div>
     </div>
 
-    <!-- G6 -->
     <div class="day-card" id="day-6">
-      <div class="day-header"><div class="day-num">06</div><div class="day-title-block"><h3>San Sebastián + Isla Santa Clara</h3><span>Lunedì 22 giugno · Gita in auto</span></div></div>
+      <div class="day-hdr"><div class="day-num">06</div><div class="day-tb"><h3>San Sebastián + Isla Santa Clara</h3><span>Lunedì 22 giugno · Gita in auto</span></div></div>
       <div class="day-body">
-        <div class="day-weather">🌞 22–25°C · Il miglior giugno per la Concha</div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>Partenza 9:30</strong> da Bilbao verso San Sebastián (~1h10 via A-8)</span></div>
-        <div class="day-row"><span class="day-row-icon">🏖️</span><span><strong>~11:00</strong> Playa de La Concha — una delle spiagge più belle d'Europa. Passeggiata sul lungomare a forma di mezzaluna.</span></div>
-        <div class="day-row"><span class="day-row-icon">🥾</span><span><strong>~12:00</strong> Salita al Monte Urgull — sentieri ombreggiati, vista sulla baia e sull'Isla Santa Clara</span></div>
-
-        <div class="island-card">
+        <div class="day-wx">🌞 22–25°C</div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>Partenza 9:30</strong> verso San Sebastián (~1h10)</span></div>
+        <div class="dr"><span class="dri">🏖️</span><span><strong>~11:00</strong> Playa de La Concha — una delle spiagge più belle d'Europa</span></div>
+        <div class="dr"><span class="dri">🥾</span><span><strong>~12:00</strong> Monte Urgull — vista sulla baia e sull'Isla Santa Clara</span></div>
+        <div class="isl">
           <h3>🏝️ Isla de Santa Clara — in traghetto!</h3>
-          <p>Al centro della Baia della Concha c'è questa piccola isola con la spiaggia più speciale: appare solo con la bassa marea (è l'unica spiaggia orientata a sud di tutto il Paese Basco). Si raggiunge con il traghetto "Motoras de la Isla" dal porto di San Sebastián.</p>
-          <div class="island-detail">
-            <span class="island-pill">⛵ ~8€ andata e ritorno</span>
-            <span class="island-pill">🕐 Ogni ora · giugno–settembre</span>
-            <span class="island-pill">🏊 Bar + bagnini + docce in estate</span>
-            <span class="island-pill">📷 Faro del 1864 · vista panoramica</span>
+          <p>Al centro della Baia della Concha. Spiaggia visibile solo con bassa marea. Traghetto "Motoras de la Isla" dal porto, ogni ora da giugno a settembre.</p>
+          <div class="isl-det">
+            <span class="isl-pill">⛵ ~8€ a/r</span>
+            <span class="isl-pill">🕐 Ogni ora · giugno–settembre</span>
+            <span class="isl-pill">🏊 Bar + bagnini</span>
+            <span class="isl-pill">🌊 Verificare tide-forecast.com</span>
           </div>
-          <p style="margin-top:0.75rem; font-size:0.82rem; color:rgba(255,255,255,0.7);">💡 La spiaggia sabbiosa appare solo con la bassa marea — controllate tide-forecast.com per il 22 giugno e sceglite l'orario del traghetto di conseguenza.</p>
+        </div>
+        <div class="dr"><span class="dri">🍢</span><span><strong>~15:30</strong> Ir de pintxos nella Parte Vieja · Atari, Ganbara, Sirimiri</span></div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~19:00</strong> Rientro a Bilbao (~1h10)</span></div>
+      </div>
+    </div>
+
+    <div class="day-card" id="day-7">
+      <div class="day-hdr"><div class="day-num">07</div><div class="day-tb"><h3>Zumaia + Flysch + Getaria</h3><span>Martedì 23 giugno · Ultima gita · Rientro a Bilbao</span></div></div>
+      <div class="day-body">
+        <div class="day-wx">🌤 20–23°C</div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>Partenza 9:30</strong> verso Zumaia (~75 km, ~1h)</span></div>
+        <div class="dr"><span class="dri">🌊</span><span><strong>~10:30</strong> Flysch di Zumaia — scogliere geologiche, spiaggia di Itzurun</span></div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~13:00</strong> Getaria (~6 km)</span></div>
+        <div class="dr"><span class="dri">⚓</span><span><strong>~13:30</strong> Getaria — borgo medievale, Monte San Antón, patria di Balenciaga</span></div>
+        <div class="dr"><span class="dri">🍷</span><span><strong>~15:30</strong> Degustazione txakoli locale</span></div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~17:00</strong> Rientro a Bilbao (~1h) · Cena, relax, valigie</span></div>
+        <div class="alert"><strong>📦 Stasera:</strong> Preparate le valigie! Check-out domani ore 11:00.</div>
+      </div>
+    </div>
+
+    <div class="day-card" id="day-8">
+      <div class="day-hdr"><div class="day-num">08</div><div class="day-tb"><h3>Rientro — arrivederci Norte Salvaje!</h3><span>Mercoledì 24 giugno · Bilbao → Santander → Venezia Treviso</span></div></div>
+      <div class="day-body">
+        <div class="day-wx">☀️ Si torna a casa</div>
+        <div class="dr"><span class="dri">⏰</span><span><strong>Entro le 11:00</strong> Check-out — valigie pronte dalla sera prima!</span></div>
+        <div class="dr"><span class="dri">☕</span><span><strong>~10:30</strong> Ultimo pintxo. Sentitevi liberi di piangere.</span></div>
+        <div class="dr"><span class="dri">🚗</span><span><strong>~11:00</strong> Partenza verso aeroporto Santander (~1h15)</span></div>
+        <div class="dr"><span class="dri">🅿️</span><span><strong>~12:30</strong> Resa auto OK Mobility · portare voucher + documenti</span></div>
+        <div class="dr"><span class="dri">🛫</span><span><strong>14:50</strong> Volo FR3602 Santander → Venezia Treviso</span></div>
+        <div class="dr"><span class="dri">🏠</span><span><strong>16:55</strong> Arrivo a Treviso. Racconti, foto e già la voglia di tornare.</span></div>
+        <div class="alert"><strong>⏰ Tempistica stretta:</strong> Check-out 11:00 → guida 1h15 → resa auto → check-in aeroporto. Partite puntuali.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COSA DA VEDERE -->
+<div id="page-cosadavedere" class="page">
+  <div class="hero hero-sm"><div class="hero-pat"></div><div class="hero-tag">Sezione 04</div><h1 class="hero-title hero-title-sm">Cosa <em>Vedere</em></h1><p class="hero-sub">I luoghi principali tappa per tappa, con foto</p></div>
+  <div class="sec">
+
+    <!-- BILBAO -->
+    <div class="place-section">
+      <div class="place-section-title">🏙️ Bilbao</div>
+      <div class="place-grid">
+
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <div style="height:220px;overflow:hidden"><img src="https://images.unsplash.com/photo-1576502200916-3808e07386a5?w=600&q=80" alt="Guggenheim Bilbao" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          </div>
+          <div class="place-body">
+            <div class="place-name">Museo Guggenheim</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Imperdibile</span><span class="pbadge pbadge-book">Prenotare online</span></div>
+            <div class="place-desc">L'edificio in titanio di Frank Gehry (1997) è già di per sé un'opera d'arte — curvo, riflettente, impossibile. All'interno una delle più importanti collezioni d'arte contemporanea al mondo: Jeff Koons, Richard Serra, Louise Bourgeois. Il Puppy di fiori all'ingresso è uno dei simboli di Bilbao.</div>
+            <div class="place-tips">💡 Prenotare su guggenheim-bilbao.eus · Audioguida inclusa · No foto all'interno · Portate giacca (sale molto fresche)</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Guggenheim+Museum+Bilbao" target="_blank">📍 Maps</a>
+          </div>
         </div>
 
-        <div class="day-row"><span class="day-row-icon">🍢</span><span><strong>~15:30</strong> Ir de pintxos nella Parte Vieja — il rito basco per eccellenza. Bar in bar con txakoli. Consigliati: Atari, Ganbara, Sirimiri.</span></div>
-        <div class="day-row"><span class="day-row-icon">📸</span><span><strong>~17:30</strong> Plaza de la Constitución e centro storico art nouveau</span></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~19:00</strong> Rientro a Bilbao (~1h10)</span></div>
-        <div class="day-food">🍽️ Pintxos nella Parte Vieja: 2–5€ a pintxo · budget ~15–20€ per giro completo con bevande · Cena leggera a Bilbao</div>
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <div style="height:220px;overflow:hidden"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Casco Viejo Bilbao" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          </div>
+          <div class="place-body">
+            <div class="place-name">Casco Viejo — Las Siete Calles</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Imperdibile</span><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Il cuore medievale di Bilbao: sette strade parallele costruite nel 1300. Plaza Nueva con i suoi portici è il centro della vita pintxos. La Cattedrale di Santiago, il Mercado de la Ribera (il più grande mercato coperto d'Europa), i vicoli stretti e le case colorate.</div>
+            <div class="place-tips">💡 Migliore il mattino presto o dopo le 19:00 · Il sabato mattina il Mercado è al massimo della vita</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Casco+Viejo+Bilbao" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#1a3a5c,#0a2540);display:flex;align-items:center;justify-content:center;font-size:4rem">🦋</div>
+          <div class="place-body">
+            <div class="place-name">Alhóndiga / Azkuna Zentroa</div>
+            <div class="place-badges"><span class="pbadge pbadge-free">Entrata gratuita</span></div>
+            <div class="place-desc">Ex magazzino del vino trasformato in centro culturale dall'architetto Philippe Starck. Il colpo d'occhio è nelle 43 colonne d'ingresso, ognuna decorata da un artista diverso: egiziane, zen, surrealiste. Sopra la sala colonne c'è una piscina con fondo trasparente.</div>
+            <div class="place-tips">💡 Ottimo in caso di pioggia · Vale anche solo per ammirare le colonne · Concerti ed eventi regolari</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Azkuna+Zentroa+Bilbao" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#2d6a4f,#1a4a2e);display:flex;align-items:center;justify-content:center;font-size:4rem">🚡</div>
+          <div class="place-body">
+            <div class="place-name">Funivia Artxanda</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Vista panoramica</span></div>
+            <div class="place-desc">In 3 minuti dalla città alla collina — e da lassù Bilbao si apre in tutta la sua bellezza. Si vede l'intero skyline, il Guggenheim, il Nervión, le montagne verdi basque. C'è anche un ristorante con vista sul Monte Artxanda. Ideale al tramonto.</div>
+            <div class="place-tips">💡 Stazione a Plaza del Funicular · Funziona tutti i giorni · Ottimo per il tramonto (~21:00 in giugno)</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Funicular+de+Artxanda+Bilbao" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- G7 -->
-    <div class="day-card" id="day-7">
-      <div class="day-header"><div class="day-num">07</div><div class="day-title-block"><h3>Zumaia + Flysch + Getaria</h3><span>Martedì 23 giugno · Ultima gita · Rientro a Bilbao</span></div></div>
-      <div class="day-body">
-        <div class="day-weather">🌤 20–23°C</div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>Partenza 9:30</strong> da Bilbao verso Zumaia (~75 km, ~1h via A-8)</span></div>
-        <div class="day-row"><span class="day-row-icon">🌊</span><span><strong>~10:30</strong> <strong>Flysch di Zumaia</strong> — le scogliere stratificate più spettacolari d'Europa: 100 milioni di anni di storia geologica visibili a strati sull'oceano. Spiaggia di Itzurun. Possibilità di escursione costiera verso Deba (sentiero facile, ~2h) o semplice passeggiata panoramica.</span></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~13:00</strong> Breve spostamento verso Getaria (~6 km)</span></div>
-        <div class="day-row"><span class="day-row-icon">⚓</span><span><strong>~13:30</strong> <strong>Getaria</strong> — pittoresco borgo marinaro medievale. Patria di Cristóbal Balenciaga. Monte San Antón con faro e vista sull'oceano. Due piccole spiagge bellissime.</span></div>
-        <div class="day-row"><span class="day-row-icon">🍷</span><span><strong>~15:30</strong> Degustazione txakoli locale — Getaria è uno dei centri di produzione del txakoli più importanti del Paese Basco</span></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~17:00</strong> Rientro a Bilbao (~1h) · Cena, relax, preparazione valigie</span></div>
-        <div class="alert"><strong>📦 Stasera:</strong> Preparate le valigie! Il check-out del 24 è alle 11:00 e subito dopo si parte per Santander aeroporto. Niente stress domani mattina.</div>
-        <div class="day-food">🍽️ Pranzo a Getaria: pesce fresco o pintxos nel borgo · ~15€ · Txakoli locale da degustare · Cena leggera a Bilbao</div>
+    <!-- GETXO -->
+    <div class="place-section">
+      <div class="place-section-title">🌉 Getxo — 19 giugno</div>
+      <div class="place-grid">
+
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <div style="height:220px;overflow:hidden"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80" alt="Ponte di Vizcaya" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          </div>
+          <div class="place-body">
+            <div class="place-name">Ponte di Vizcaya (Puente Colgante)</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Imperdibile</span><span class="pbadge pbadge-book">UNESCO dal 2006</span></div>
+            <div class="place-desc">Costruito nel 1893 da un allievo di Gustave Eiffel, è il solo ponte sospeso traghettante al mondo ancora funzionante. Una gondola sospesa 45 metri sopra il fiume Nervión trasporta persone e auto da una riva all'altra. Si può salire sulla passerella superiore per una vista unica sul mare e la costa.</div>
+            <div class="place-tips">💡 La passerella superiore vale davvero la salita · Getxo ha anche un elegante lungomare Liberty con ville fine '800</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Puente+Colgante+Getxo+Bilbao" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#1a6a8a,#0a3a5a);display:flex;align-items:center;justify-content:center;font-size:4rem">🌊</div>
+          <div class="place-body">
+            <div class="place-name">Puerto Viejo de Algorta</div>
+            <div class="place-badges"><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Il porto pescatori storico di Getxo — uno dei più pittoreschi della costa basca. Case bianche e rosse a picco sull'oceano, barche colorate, calette nascoste. Atmosfera autentica lontana dal turismo di massa. Il lungomare di Las Arenas è elegante, con ville Liberty e caffè vista oceano.</div>
+            <div class="place-tips">💡 Combinatelo con il Ponte di Vizcaya che è a pochi minuti a piedi · Ottimo per la passeggiata mattutina</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Puerto+Viejo+Algorta+Getxo" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- G8 -->
-    <div class="day-card" id="day-8">
-      <div class="day-header"><div class="day-num">08</div><div class="day-title-block"><h3>Rientro — arrivederci Norte Salvaje!</h3><span>Mercoledì 24 giugno · Bilbao → Santander → Venezia Treviso</span></div></div>
-      <div class="day-body">
-        <div class="day-weather">☀️ Qualunque tempo sia, si torna a casa</div>
-        <div class="day-row"><span class="day-row-icon">⏰</span><span><strong>Entro le 11:00</strong> Check-out dall'Airbnb — valigie pronte dalla sera prima!</span></div>
-        <div class="day-row"><span class="day-row-icon">☕</span><span><strong>~10:30</strong> Ultima colazione basca. Ultimo pintxo. Sentitevi liberi di piangere.</span></div>
-        <div class="day-row"><span class="day-row-icon">🚗</span><span><strong>~11:00</strong> Partenza verso aeroporto Santander (~115 km, ~1h15 via A-8)</span></div>
-        <div class="day-row"><span class="day-row-icon">🅿️</span><span><strong>~12:30</strong> Resa auto OK Mobility — area Arrivi aeroporto Santander (SDR) · portare voucher + documenti originali</span></div>
-        <div class="day-row"><span class="day-row-icon">🛫</span><span><strong>14:50</strong> Volo FR3602 Santander → Venezia Treviso</span></div>
-        <div class="day-row"><span class="day-row-icon">🏠</span><span><strong>16:55</strong> Arrivo a Treviso. Racconti, foto e già la voglia di tornare.</span></div>
-        <div class="alert"><strong>⏰ Tempistica stretta:</strong> Check-out 11:00 → guida 1h15 → resa auto → check-in aeroporto. Partite puntuali. Siate all'aeroporto entro le 13:00.</div>
+    <!-- URDAIBAI BERMEO MUNDAKA -->
+    <div class="place-section">
+      <div class="place-section-title">🌿 Urdaibai + Bermeo + Mundaka — 20 giugno</div>
+      <div class="place-grid">
+
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <div style="height:220px;overflow:hidden"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Riserva Urdaibai" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          </div>
+          <div class="place-body">
+            <div class="place-name">Riserva della Biosfera di Urdaibai</div>
+            <div class="place-badges"><span class="pbadge pbadge-free">UNESCO</span></div>
+            <div class="place-desc">Una delle riserve naturali più importanti del Nord Spagna: estuario, zone umide, boschi di quercia e spiagge selvagge. Habitat per centinaia di specie di uccelli migratori. Paesaggi che sembrano Irlanda: verdi, nebbiosi, oceanici. La pineta di Mundaka e le falesie di Ogoño sono scenari straordinari.</div>
+            <div class="place-tips">💡 Ottimo per una passeggiata mattutina tra Kortezubi e Gernika · Cueva di Santimamiñe con pitture rupestri (prenotare)</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Reserva+Biosfera+Urdaibai+Gernika" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#8b4513,#5a2d0c);display:flex;align-items:center;justify-content:center;font-size:4rem">⚓</div>
+          <div class="place-body">
+            <div class="place-name">Bermeo — Porto dei Pescatori</div>
+            <div class="place-badges"><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Uno dei più bei porti di pesca della costa basca. Case colorate che si specchiano sull'acqua, barche tradizionali, una torre medievale che sorveglia l'imboccatura. Il Museo dei Pescatori racconta la storia marinara basca. Il pesce venduto all'asta mattutina finisce sui tavoli dei ristoranti entro poche ore.</div>
+            <div class="place-tips">💡 Pranzo qui è quasi obbligatorio — i ristoranti sul porto hanno pesce freschissimo · L'isolotto di Izaro visto dal porto è magnifico</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Puerto+de+Bermeo+Bizkaia" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#1a6a8a,#0d3d5a);display:flex;align-items:center;justify-content:center;font-size:4rem">🏄</div>
+          <div class="place-body">
+            <div class="place-name">Mundaka</div>
+            <div class="place-badges"><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Il borgo del surf basco per eccellenza. La sua onda sinistra — lunga fino a 400 metri — è considerata la migliore d'Europa e attira surfisti da tutto il mondo. Ma Mundaka è anche un borgo incantevole: chiesa romanica, case bianche, lungomare tranquillo sull'estuario di Urdaibai.</div>
+            <div class="place-tips">💡 Anche senza surf, l'atmosfera è rilassata e autentica · Dal pontile si vede l'onda e l'estuario insieme</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Mundaka+Bizkaia" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GAZTELUGATXE + LEKEITIO -->
+    <div class="place-section">
+      <div class="place-section-title">🏔️ Gaztelugatxe + Lekeitio — 21 giugno</div>
+      <div class="place-grid">
+
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <div style="height:220px;overflow:hidden"><img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=600&q=80" alt="Gaztelugatxe" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          </div>
+          <div class="place-body">
+            <div class="place-name">San Juan de Gaztelugatxe</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Imperdibile</span></div>
+            <div class="place-desc">Un isolotto collegato alla terraferma da un ponte di pietra tortuoso, con 231 gradini che salgono fino a una cappella dell'XI secolo. L'oceano Atlantico si rompe sulle rocce tutto intorno. Scenografia mozzafiato in ogni direzione. La leggenda dice: suonare la campana 3 volte porta fortuna.</div>
+            <div class="place-tips">💡 Conosciuto come "Dragonstone" in Game of Thrones · Scarpe comode obbligatorie · Arrivo presto per evitare code · Parcheggio a pagamento in zona</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=San+Juan+de+Gaztelugatxe+Bermeo" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#2d6a4f,#1a3a5c);display:flex;align-items:center;justify-content:center;font-size:4rem">🏝️</div>
+          <div class="place-body">
+            <div class="place-name">Isla de San Nicolás — Lekeitio</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Esperienza unica</span><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Di fronte al borgo di Lekeitio, questa piccola isola disabitata è raggiungibile solo attraverso una passerella di pietra muschiosa che emerge con la bassa marea. La marea sale ogni 6 ore — bisogna pianificare attentamente. Sull'isola: natura selvaggia, silenzio, viste spettacolari sulla costa.</div>
+            <div class="place-tips">💡 Verificare le maree su tideschart.com PRIMA di partire · Max 2h sull'isola per sicurezza · Scarpe con suola antiscivolo obbligatorie</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Isla+San+Nicolas+Lekeitio" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#b8860b,#8b5a00);display:flex;align-items:center;justify-content:center;font-size:4rem">⛪</div>
+          <div class="place-body">
+            <div class="place-name">Lekeitio — Il Borgo</div>
+            <div class="place-badges"><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Uno dei borghi più belli della costa basca. Porto coloratissimo con barche, la Basilica di Santa María dell'Asunción (gotica, XV sec) che domina la piazza, palazzi nobiliari e calette nascoste. Atmosfera autentica e non turistica come San Sebastián.</div>
+            <div class="place-tips">💡 La Basilica vale una visita · Il porto di sera è perfetto per aperitivo</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Lekeitio+puerto" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SAN SEBASTIAN -->
+    <div class="place-section">
+      <div class="place-section-title">🍢 San Sebastián — 22 giugno</div>
+      <div class="place-grid">
+
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <div style="height:220px;overflow:hidden"><img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80" alt="La Concha San Sebastian" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          </div>
+          <div class="place-body">
+            <div class="place-name">Playa de La Concha</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Imperdibile</span><span class="pbadge pbadge-free">Gratuita</span></div>
+            <div class="place-desc">La spiaggia più famosa dei Paesi Baschi — e una delle più belle d'Europa. Forma una baia perfetta a mezzaluna, con il lungomare La Concha che la costeggia per tutta la lunghezza. Ai due lati i monti Urgull e Igueldo, al centro l'Isla Santa Clara. L'acqua è atlantica — fresca ma limpida.</div>
+            <div class="place-tips">💡 Il lungomare è perfetto per una passeggiata mattutina · Il tramonto visto dalla spiaggia è memorabile</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Playa+La+Concha+San+Sebastian" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#2d6a4f,#1a4a2e);display:flex;align-items:center;justify-content:center;font-size:4rem">🥾</div>
+          <div class="place-body">
+            <div class="place-name">Monte Urgull</div>
+            <div class="place-badges"><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Il monte che domina San Sebastián dalla parte del mare. Sentieri nel bosco, una fortezza medievale sulla cima, la grande statua del Sacro Cuore visibile da tutta la baia. La vista panoramica dall'alto — sulla La Concha, sull'Isla Santa Clara, sul Monte Igueldo — è uno dei momenti più belli del viaggio.</div>
+            <div class="place-tips">💡 Accesso gratuito sempre · Ci vogliono circa 30–40 min per salire · La mattina presto è quasi deserto</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Monte+Urgull+San+Sebastian" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#0a2540,#1a3a5c);display:flex;align-items:center;justify-content:center;font-size:4rem">🏝️</div>
+          <div class="place-body">
+            <div class="place-name">Isla de Santa Clara</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Esperienza unica</span></div>
+            <div class="place-desc">La piccola isola al centro della Baia della Concha. La sua spiaggia sabbiosa appare solo con la bassa marea — è l'unica esposta a sud di tutto il Paese Basco. Un faro dell'800, vegetazione selvaggia, silenzio assoluto a pochi metri dalla città. Il traghetto parte dal porto ogni ora.</div>
+            <div class="place-tips">💡 Traghetto "Motoras de la Isla" · Verificare le maree su tide-forecast.com · Bar, bagnini e docce in estate</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Isla+Santa+Clara+San+Sebastian" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#8b1a1a,#6b0f0f);display:flex;align-items:center;justify-content:center;font-size:4rem">🍢</div>
+          <div class="place-body">
+            <div class="place-name">Parte Vieja — il quartiere dei pintxos</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Imperdibile</span><span class="pbadge pbadge-free">Gratuito camminare</span></div>
+            <div class="place-desc">Il quartiere antico di San Sebastián è il paradiso dei pintxos. Decine di bar con banconi straripanti di pintxos creativi, vicoletti medievali, Plaza de la Constitución con i suoi balconi numerati (ex arena dei tori). L'ir de pintxos — girovagare di bar in bar mangiando 2–3 pezzi per volta — è il rituale basco più autentico.</div>
+            <div class="place-tips">💡 Meglio dopo le 19:00 · Ordinate sempre i pintxos caldi (calientes) appena fatti · Accompagnate con txakoli versato dall'alto</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Parte+Vieja+San+Sebastian" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ZUMAIA + GETARIA -->
+    <div class="place-section">
+      <div class="place-section-title">🌊 Zumaia + Getaria — 23 giugno</div>
+      <div class="place-grid">
+
+        <div class="place-card">
+          <div class="place-img-wrap">
+            <div style="height:220px;overflow:hidden"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" alt="Flysch Zumaia" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          </div>
+          <div class="place-body">
+            <div class="place-name">Flysch di Zumaia</div>
+            <div class="place-badges"><span class="pbadge pbadge-must">Imperdibile</span><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Le scogliere più spettacolari d'Europa: 100 milioni di anni di storia geologica visibili a strati verticali sull'oceano. Ogni strato è un periodo storico — c'è persino lo strato che segna l'estinzione dei dinosauri. La spiaggia di Itzurun è circondata da queste pareti stratificate che scendono a picco sul mare.</div>
+            <div class="place-tips">💡 È anche possibile fare un'escursione costiera guidata verso Deba per vedere il flysch dall'acqua (2–3h) · Mega panorama dal sentiero in cima</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Flysch+Zumaia+Itzurun" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#b8860b,#8b6500);display:flex;align-items:center;justify-content:center;font-size:4rem">⚓</div>
+          <div class="place-body">
+            <div class="place-name">Getaria — Il Borgo</div>
+            <div class="place-badges"><span class="pbadge pbadge-free">Gratuito</span></div>
+            <div class="place-desc">Pittoresco borgo medievale su un promontorio con porto di pesca. Patria di Juan Sebastián Elcano (primo circumnavigatore del globo, 1522) e di Cristóbal Balenciaga (il più grande stilista spagnolo). La Iglesia de San Salvador gotica e il Monte San Antón con faro e vista sull'oceano sono imperdibili.</div>
+            <div class="place-tips">💡 Museo Balenciaga a pochi metri (architettura e moda) · Txakoli locale da degustare · Il borgo si gira in un'ora a piedi</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Getaria+Gipuzkoa" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img-wrap" style="background:linear-gradient(135deg,#6a0dad,#3d006b);display:flex;align-items:center;justify-content:center;font-size:4rem">👗</div>
+          <div class="place-body">
+            <div class="place-name">Museo Balenciaga</div>
+            <div class="place-badges"><span class="pbadge pbadge-book">Biglietto online</span></div>
+            <div class="place-desc">Il museo dedicato a Cristóbal Balenciaga, nato proprio a Getaria nel 1895. Considerato il più grande sarto del XX secolo, "lo stilista degli stilisti" secondo Coco Chanel. Il museo conserva oltre 1.200 pezzi originali: abiti da sera, cappotti, cappelli, accessori. L'edificio stesso è un'opera di architettura contemporanea.</div>
+            <div class="place-tips">💡 Visita facoltativa — se la moda vi interessa vale molto · Prenotare su cristobalbalenciagamuseoa.com · ~10€</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Cristobal+Balenciaga+Museoa+Getaria" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+
       </div>
     </div>
 
   </div>
 </div>
-
-<!-- LOGISTICA -->
-<div id="page-logistica" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 04</div>
-    <h1 class="hero-title hero-title-sm">Voli & <em>Auto</em></h1>
-    <p class="hero-sub">Tutto quello che serve per non perdere aerei né depositi</p>
-  </div>
-  <div class="sec">
-    <div class="sec-label">Voli · Ryanair</div>
-    <h2 class="sec-title">Prenotazione GQWS5V</h2>
-    <div class="flight-card">
-      <div><div class="flight-time">12:05</div><div class="flight-apt">Venezia Treviso (TSF)</div></div>
-      <div class="flight-arrow">✈ ————————</div>
-      <div><div class="flight-time">14:25</div><div class="flight-apt">Santander (SDR)</div></div>
-      <div style="margin-left:auto; text-align:right;"><span class="badge">FR3603</span><div class="flight-info" style="margin-top:0.35rem;">17 giugno 2026 · Andata</div></div>
-    </div>
-    <div class="flight-card">
-      <div><div class="flight-time">14:50</div><div class="flight-apt">Santander (SDR)</div></div>
-      <div class="flight-arrow">✈ ————————</div>
-      <div><div class="flight-time">16:55</div><div class="flight-apt">Venezia Treviso (TSF)</div></div>
-      <div style="margin-left:auto; text-align:right;"><span class="badge">FR3602</span><div class="flight-info" style="margin-top:0.35rem;">24 giugno 2026 · Ritorno</div></div>
-    </div>
-    <div class="alert"><strong>⚠️ Il 24 giugno:</strong> Check-out Airbnb 11:00 → guida ~1h15 → resa auto 12:30 → volo 14:50. Margine minimo. Partite puntuali.</div>
-
-    <div class="divider" style="margin:2rem 0;"></div>
-    <div class="sec-label">Auto noleggio</div>
-    <h2 class="sec-title">DoYouSpain · DYS-197926900</h2>
-    <div class="infobox">
-      <strong>Veicolo:</strong> Renault Espace 7 posti A/C (o simile) · Totale: 386,12 €<br><br>
-      <strong>Ritiro:</strong> 17/06/2026 ore 14:30 · Santander Aeroporto (SDR)<br>
-      → Ufficio OK Mobility Rent A Car · Area Arrivi<br><br>
-      <strong>Resa:</strong> 24/06/2026 ore 12:30 · Santander Aeroporto (SDR)<br><br>
-      <strong>📞 DoYouSpain:</strong> support.doyouspain.com · +34 964 830 995
-    </div>
-    <div class="alert">
-      <strong>⚠️ Da portare (ORIGINALI — no digitale, no fotocopie):</strong><br>
-      ✓ Voucher stampato (Sandro — fallo adesso!)<br>
-      ✓ Patente originale del conducente<br>
-      ✓ Carta d'identità o passaporto originale<br>
-      ✓ Carta di credito + PIN se associato<br><br>
-      Tariffa non rimborsabile — nessuna modifica possibile.
-    </div>
-
-    <div class="divider" style="margin:2rem 0;"></div>
-    <div class="sec-label">Spostamenti</div>
-    <h2 class="sec-title">Distanze e tempi</h2>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Tratta</th><th>Km</th><th>Tempo</th></tr>
-        <tr><td>Santander → Bilbao</td><td>~100 km</td><td>~1h15</td></tr>
-        <tr><td>Bilbao → Getxo</td><td>~15 km</td><td>~20 min</td></tr>
-        <tr><td>Bilbao → Urdaibai / Bermeo</td><td>~40 km</td><td>~45 min</td></tr>
-        <tr><td>Bilbao → Gaztelugatxe</td><td>~35 km</td><td>~45 min</td></tr>
-        <tr><td>Gaztelugatxe → Lekeitio</td><td>~35 km</td><td>~45 min</td></tr>
-        <tr><td>Bilbao → San Sebastián</td><td>~100 km</td><td>~1h10</td></tr>
-        <tr><td>Bilbao → Zumaia</td><td>~75 km</td><td>~1h</td></tr>
-        <tr><td>Zumaia → Getaria</td><td>~6 km</td><td>~10 min</td></tr>
-        <tr><td>Bilbao → Santander</td><td>~115 km</td><td>~1h15</td></tr>
-      </table>
-    </div>
-    <div class="success-box">💡 A Bilbao in città: metro (linee 1 e 2) o piedi. Biglietto ~1,70€. Tessera Barik ricaricabile consigliata. L'auto serve solo per le gite fuori porta.</div>
-  </div>
-</div>
-
-<!-- ALLOGGIO -->
-<div id="page-alloggio" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 05</div>
-    <h1 class="hero-title hero-title-sm">La nostra <em>Casa</em></h1>
-    <p class="hero-sub">7 notti all'Airbnb di Alberto a Bilbao</p>
-  </div>
-  <div class="sec">
-    <div class="infobox">
-      <strong>📍 Airbnb — Appartamento intero (host: Alberto)</strong><br>
-      Julian Gaiarre Hiribidea, 94 — 48004 Bilbao, Euskadi, Spain<br><br>
-      🛏️ Piano 3 · 3 camere + 2 bagni · Check-in 24h · Metro a 3 min · WiFi<br>
-      👥 6 adulti<br><br>
-      ✅ <strong>Check-in:</strong> Mercoledì 17 giugno — dopo le 15:00<br>
-      ✅ <strong>Check-out:</strong> Mercoledì 24 giugno — entro le 11:00
-    </div>
-    <div class="alert"><strong>📅 Mattina del 24:</strong> Check-out 11:00 → partenza per Santander 11:00. Valigie pronte la sera del 23!</div>
-    <div class="grid-2" style="margin-top:1.5rem;">
-      <div class="card"><div class="card-title">📍 Posizione</div>Vicino al Casco Viejo. A piedi: Plaza Nueva 10 min, Guggenheim 20 min. Metro a 3 minuti.</div>
-      <div class="card"><div class="card-title">🚇 Metro</div>Linee 1 e 2. Biglietto ~1,70€. Tessera Barik ricaricabile per risparmiare. Bilbao centro ↔ aeroporto ~30 min.</div>
-      <div class="card"><div class="card-title">🅿️ Auto</div>Non portate l'auto in centro. Parcheggiate in zona appartamento e muovetevi con metro e piedi.</div>
-      <div class="card"><div class="card-title">🛒 Spesa</div>Mercadona o Eroski vicini. Ottimi per fare scorta di txakoli, snack per le gite e colazioni in casa.</div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOD -->
-<div id="page-food" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 06</div>
-    <h1 class="hero-title hero-title-sm">Food & <em>Drink</em></h1>
-    <p class="hero-sub">I Paesi Baschi mangiano meglio di chiunque altro in Europa</p>
-  </div>
-  <div class="sec">
-    <div class="grid-3">
-      <div class="card"><div class="card-title">🥖 Pintxos</div>Il cibo simbolo. Fette di pane con ingredienti tenuti da uno stuzzicadenti. Si mangiano in piedi al bancone. 2–5€ l'uno. Obbligatori ogni giorno.</div>
-      <div class="card"><div class="card-title">🍷 Txakoli</div>Vino bianco frizzante e acidulo, tipico basco. Versato dall'alto per ossigenarlo. Abbinamento perfetto con pesce e pintxos.</div>
-      <div class="card"><div class="card-title">🍎 Sidro</div>La sidra basca è una religione. Nelle sidrerie viene versata dall'alto in bicchieri larghi. Da fare almeno una sera.</div>
-      <div class="card"><div class="card-title">🐟 Bacalao</div>Il baccalà basco in mille versioni: al pil-pil, vizcaína, a la plancha. Sempre fresco, sempre buono.</div>
-      <div class="card"><div class="card-title">🦐 Frutti di mare</div>Txangurro (granchio), acciughe del Cantabrico, calamari. Pesce atlantico freschissimo di qualità superiore.</div>
-      <div class="card"><div class="card-title">🥩 Chuletón</div>La costata basca è leggendaria. Se volete una cena speciale (tipo il compleanno), questa è la scelta. 30–45€ a testa.</div>
-    </div>
-    <div class="divider" style="margin:2rem 0;"></div>
-    <div class="sec-label">Budget</div>
-    <h2 class="sec-title">Quanto si spende</h2>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Tipo pasto</th><th>Costo a testa</th><th>Quando</th></tr>
-        <tr><td>Colazione</td><td>3–5€</td><td>Ogni mattina</td></tr>
-        <tr><td>Pintxos + drink</td><td>10–15€</td><td>Pranzo veloce / aperitivo</td></tr>
-        <tr><td>Menú del día</td><td>12–15€</td><td>Pranzo seduto</td></tr>
-        <tr><td>Cena al ristorante</td><td>18–25€</td><td>Cena standard</td></tr>
-        <tr><td>Cena speciale</td><td>30–45€</td><td>Compleanno / cena "grande"</td></tr>
-      </table>
-    </div>
-    <div class="divider" style="margin:2rem 0;"></div>
-    <div class="sec-label">Dove</div>
-    <h2 class="sec-title">Posti consigliati</h2>
-    <div class="grid-2">
-      <div class="card"><div class="card-title">🏙️ Bilbao</div>Bar Víctor Montes · Café Bar Bilbao (entrambi in Plaza Nueva) · Mercado de la Ribera (mattina) · Zona Ensanche per cene meno turistiche</div>
-      <div class="card"><div class="card-title">🍢 San Sebastián</div>Atari · Ganbara (Calle San Jerónimo 21) · Sirimiri · Zeruko — tutti nella Parte Vieja</div>
-      <div class="card"><div class="card-title">⚓ Bermeo / Lekeitio / Getaria</div>Qualsiasi baretto sul porto — chiedete il pesce del giorno. Menù ~12–15€. Txakoli locale a Getaria.</div>
-      <div class="card"><div class="card-title">🌊 Zumaia / Mundaka</div>Locali sul lungomare per pesce fresco e grigliata atlantica. Prezzi onesti, qualità alta.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ESPERIENZE -->
-<div id="page-esperienze" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 07</div>
-    <h1 class="hero-title hero-title-sm">Le <em>Esperienze</em></h1>
-    <p class="hero-sub">Imperdibili, consigliate e le due isole speciali</p>
-  </div>
-  <div class="sec">
-    <div class="sec-label">Imperdibili</div>
-    <h2 class="sec-title">Da non saltare</h2>
-    <ul class="checklist">
-      <li><strong>Guggenheim Museum Bilbao</strong> — prenotare online su guggenheim-bilbao.eus (~13€ adulti)</li>
-      <li><strong>Free Walking Tour Bilbao</strong> — guruwalk.com, offerta libera, ~2h, ottimo il primo giorno pieno</li>
-      <li><strong>San Juan de Gaztelugatxe</strong> — 231 gradini, campana, oceano. Scarpe comode obbligatorie.</li>
-      <li><strong>Isla de San Nicolás (Lekeitio)</strong> — a piedi con la bassa marea. Verificare maree su tideschart.com prima.</li>
-      <li><strong>Ir de pintxos a San Sebastián</strong> — Parte Vieja, di bar in bar con txakoli. Il rito basco più autentico.</li>
-      <li><strong>Flysch di Zumaia</strong> — scogliere stratificate uniche al mondo, 100 milioni di anni di geologia a vista d'occhio</li>
-      <li><strong>Ponte di Vizcaya (Getxo)</strong> — Patrimonio UNESCO, il solo ponte traghettante sospeso al mondo</li>
-    </ul>
-
-    <div class="divider" style="margin:2rem 0;"></div>
-
-    <div class="island-card">
-      <h3>🏝️ Isla de San Nicolás — la vera magia</h3>
-      <p>Di fronte al borgo di Lekeitio, questa piccola isola disabitata è raggiungibile solo attraverso una passerella di pietra muschiosa che emerge con la bassa marea. La marea cambia ogni 6 ore: bisogna programmare l'arrivo E la partenza entro la finestra di bassa marea.</p>
-      <div class="island-detail">
-        <span class="island-pill">🚶 A piedi · gratis</span>
-        <span class="island-pill">⏱️ Max 2h sull'isola per sicurezza</span>
-        <span class="island-pill">⚠️ Passerella scivolosa — scarpe chiuse</span>
-        <span class="island-pill">🌊 Controllare tideschart.com per il 21 giugno</span>
-      </div>
-    </div>
-
-    <div class="island-card" style="margin-top:1rem;">
-      <h3>🏝️ Isla Santa Clara (San Sebastián)</h3>
-      <p>Al centro della Baia della Concha. La sua spiaggia appare solo con la bassa marea — è l'unica orientata a sud di tutto il Paese Basco. Si raggiunge con il traghetto "Motoras de la Isla" dal porto, ogni ora da giugno a settembre.</p>
-      <div class="island-detail">
-        <span class="island-pill">⛵ ~8€ a/r</span>
-        <span class="island-pill">🕐 Ogni ora · giugno–settembre</span>
-        <span class="island-pill">🏊 Bar + bagnini + docce</span>
-        <span class="island-pill">🌊 Spiaggia visibile solo con bassa marea</span>
-      </div>
-    </div>
-
-    <div class="divider" style="margin:2rem 0;"></div>
-    <div class="sec-label">Piano B</div>
-    <h2 class="sec-title">In caso di pioggia</h2>
-    <ul class="checklist">
-      <li>Museo de Bellas Artes di Bilbao — gratuito la domenica</li>
-      <li>Alhóndiga / Azkuna Zentroa — centro culturale con architettura surreale (192 colonne tutte diverse)</li>
-      <li>Museo Balenciaga a Getaria — il più grande stilista basco del '900</li>
-      <li>Degustazione in cantina nella Rioja Alavesa (~45 min da Bilbao)</li>
-      <li>Shopping nel Casco Viejo — prodotti baschi, txakoli, ceramiche</li>
-    </ul>
-  </div>
-</div>
-
-<!-- VALIGIA -->
-<div id="page-valigia" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 08</div>
-    <h1 class="hero-title hero-title-sm">La <em>Valigia</em></h1>
-    <p class="hero-sub">Cosa mettere, cosa non dimenticare</p>
-  </div>
-  <div class="sec">
-    <div class="infobox"><strong>🌡️ Clima atteso a giugno nei Paesi Baschi</strong><br>Giorno: 20–25°C · Sera: 15–18°C · Acqua del mare: ~18–20°C<br>Tramonto: ~21:00 · ~15h di luce<br>La regione è verde per una ragione: pioggia atlantica sempre possibile. Portate sempre un k-way, anche nelle giornate di sole.</div>
-    <div class="grid-2" style="margin-top:1.5rem;">
-      <div class="card"><div class="card-title">👕 Abbigliamento</div>T-shirt (5–6) · Pantaloni leggeri · Jeans · Felpa o cardigan · K-way o giacca a vento · Scarpe comode da camminata (obbligatorie per isole e Gaztelugatxe) · Sandali · Un outfit per la cena di compleanno</div>
-      <div class="card"><div class="card-title">👙 Mare</div>Costume (2) · Asciugamano da spiaggia · Crema solare SPF30+ · Occhiali da sole · Cappello</div>
-      <div class="card"><div class="card-title">💊 Farmacia</div>Antidolorifico · Cerotti · Antistaminico · Farmaci personali · Doposole · Repellente sera · TEAM (Tessera Europea Assicurazione Malattia) per tutti</div>
-      <div class="card"><div class="card-title">📄 Documenti</div>Carta d'identità o passaporto (tutti e 6) · Patente originale (Sandro) · Voucher auto stampato (Sandro) · Conferma Airbnb · Biglietti volo · Carta di credito con PIN</div>
-      <div class="card"><div class="card-title">📱 Tecnologia</div>Caricatori · Power bank · Fotocamera · Auricolari · Google Maps offline (Bilbao, S.Sebastián, Santander, Lekeitio)</div>
-      <div class="card"><div class="card-title">🎒 Utili</div>Zaino da giorno per le gite · Bottiglia riutilizzabile · Snack per Gaztelugatxe e isole · Contanti per parcheggi e traghetti · Scarpe con suola antiscivolo per San Nicolás</div>
-    </div>
-  </div>
-</div>
-
-<!-- NOTE UTILI -->
-<div id="page-note" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 09</div>
-    <h1 class="hero-title hero-title-sm">Note <em>Utili</em></h1>
-    <p class="hero-sub">Contatti, link, checklist finale</p>
-  </div>
-  <div class="sec">
-    <div class="grid-2">
-      <div class="card"><div class="card-title">📞 Emergenze</div><strong>Emergenze Spagna:</strong> 112<br><strong>Polizia:</strong> 091<br><strong>Ospedale Bilbao:</strong> Hospital de Basurto · C/ Montevideo 18<br><strong>Consolato IT Bilbao:</strong> +34 94 416 02 44</div>
-      <div class="card"><div class="card-title">📞 Viaggio</div><strong>DoYouSpain:</strong> +34 964 830 995<br><strong>Web:</strong> support.doyouspain.com<br><strong>Ryanair:</strong> ryanair.com<br><strong>Airbnb:</strong> app · host Alberto</div>
-      <div class="card"><div class="card-title">🔗 Link utili</div>guggenheim-bilbao.eus<br>guruwalk.com/it/bilbao<br>tideschart.com (maree Lekeitio)<br>tide-forecast.com (maree S.Sebastián)<br>civitatis.com/it/bilbao<br>bilbao.eus</div>
-      <div class="card"><div class="card-title">💳 Denaro</div>Bancomat ovunque. Carta quasi sempre accettata. Tenete 20–30€ in contanti per parcheggi, mercati, traghetto Santa Clara. PIN obbligatorio per noleggio auto.</div>
-      <div class="card"><div class="card-title">🗣️ Lingua</div>Spagnolo + basco (euskara). Con lo spagnolo base ci si arrangia. "Eskerrik asko" = grazie in basco. Fa sempre effetto con i locali.</div>
-      <div class="card"><div class="card-title">📱 App</div>Google Maps offline · App meteo · Tideschart (maree) · Google Translate · Ryanair app</div>
-    </div>
-    <div class="divider" style="margin:2rem 0;"></div>
-    <div class="sec-label">Prima di partire</div>
-    <h2 class="sec-title">Checklist finale</h2>
-    <ul class="checklist">
-      <li>Voucher auto DoYouSpain stampato — Sandro, fallo adesso</li>
-      <li>Patente originale nella borsa di viaggio — Sandro</li>
-      <li>Carte d'identità o passaporti validi per tutti e 6</li>
-      <li>Biglietti volo scaricati (codice GQWS5V)</li>
-      <li>Conferma Airbnb con indirizzo (Julian Gaiarre Hiribidea 94, Bilbao)</li>
-      <li>Biglietti Guggenheim prenotati online su guggenheim-bilbao.eus</li>
-      <li>Free Tour Bilbao prenotato su guruwalk.com per il 18 giugno mattina</li>
-      <li>Carta di credito con PIN per deposito noleggio auto</li>
-      <li>TEAM per tutti e 6</li>
-      <li>Google Maps offline scaricata per Bilbao, San Sebastián, Lekeitio, Zumaia</li>
-      <li>Maree Lekeitio (21 giugno) verificate su tideschart.com</li>
-      <li>Maree San Sebastián (22 giugno) verificate su tide-forecast.com</li>
-      <li>Power bank carico</li>
-      <li>Scarpe con suola antiscivolo per la passerella di San Nicolás</li>
-    </ul>
-  </div>
-</div>
-
-<!-- FUN -->
-<div id="page-fun" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 10</div>
-    <h1 class="hero-title hero-title-sm">La parte <em>seria</em> 😏</h1>
-    <p class="hero-sub">Regole, premi e profezie</p>
-  </div>
-  <div class="sec">
-    <div class="fun-bg">
-      <div class="fun-motto">"Norte Salvaje — mangiamo, esploriamo,<br>torneremo più grassi e più felici."</div>
-      <div class="sub-label">Le regole non ufficiali del gruppo</div>
-      <div class="rule">Nessuno può dire "facciamo in fretta" durante i pintxos. I pintxos non conoscono l'urgenza.</div>
-      <div class="rule">Il conducente (Sandro) ha sempre ragione sul percorso. Fino a quando non sbaglia. Poi ha comunque ragione lui.</div>
-      <div class="rule">Silvia ha organizzato tutto. Le si dice grazie almeno una volta al giorno. Possibilmente con un txakoli in mano.</div>
-      <div class="rule">Lorenzo può citare Game of Thrones a Gaztelugatxe: una volta sola. Dopo quella, silenzio.</div>
-      <div class="rule">A Enrica non si chiedono pareri sui formaggi. Mai. Neanche per scherzo.</div>
-      <div class="rule">Emilio è il responsabile ufficiale della soddisfazione gastronomica del gruppo. Funzione onorifica e irrevocabile.</div>
-      <div class="rule">Chi resta sull'Isla San Nicolás dopo che è salita la marea paga da bere per tutta la settimana.</div>
-      <div class="sub-label" style="margin-top:2rem;">Premi simbolici</div>
-      <div class="grid-3" style="gap:0.75rem; margin-top:0.5rem;">
-        <div class="award-card-fun"><span class="award-emoji">🗺️</span><div class="award-name">Silvia</div><div class="award-desc">Premio "Architetto del Caos Organizzato" — ha prenotato tutto, incluso il suo compleanno in Spagna</div></div>
-        <div class="award-card-fun"><span class="award-emoji">🚗</span><div class="award-name">Sandro</div><div class="award-desc">Premio "Pilota Atlantico" — 7 giorni di autostrade spagnole senza perdersi (si spera)</div></div>
-        <div class="award-card-fun"><span class="award-emoji">🌊</span><div class="award-name">Eva</div><div class="award-desc">Premio "Prima nell'Oceano" — a 16 anni la prima a tuffarsi a La Concha, ovviamente</div></div>
-        <div class="award-card-fun"><span class="award-emoji">🐉</span><div class="award-name">Lorenzo</div><div class="award-desc">Premio "Dracarys!" — la reazione più memorabile davanti a Gaztelugatxe, garantita</div></div>
-        <div class="award-card-fun"><span class="award-emoji">🍷</span><div class="award-name">Emilio</div><div class="award-desc">Premio "Sommelier del Txakoli" — ha preso molto sul serio il suo ruolo istituzionale</div></div>
-        <div class="award-card-fun"><span class="award-emoji">🐟</span><div class="award-name">Enrica</div><div class="award-desc">Premio "Amante del Bacalao" — ha scoperto che la vera specialità basca non è il formaggio</div></div>
-      </div>
-      <div class="final-quote">
-        <p>"I migliori viaggi non si pianificano — si assaporano.<br>Ma avere un buon depliant aiuta comunque."</p>
-        <small>Norte Salvaje · Bilbao · Paesi Baschi · Giugno 2026</small>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <!-- RISTORANTI -->
 <div id="page-ristoranti" class="page">
-  <div class="hero hero-sm">
-    <div class="hero-pattern"></div>
-    <div class="hero-tag">Sezione 11</div>
-    <h1 class="hero-title hero-title-sm">Dove <em>Mangiare</em></h1>
-    <p class="hero-sub">Ristoranti e locali selezionati tappa per tappa</p>
-  </div>
+  <div class="hero hero-sm"><div class="hero-pat"></div><div class="hero-tag">Sezione 05</div><h1 class="hero-title hero-title-sm">Dove <em>Mangiare</em></h1><p class="hero-sub">Ristoranti e locali selezionati tappa per tappa</p></div>
   <div class="sec">
     <div class="city-tab-bar">
       <button class="city-tab active" onclick="showCity('bilbao',this)">🏙️ Bilbao</button>
       <button class="city-tab" onclick="showCity('getxo',this)">🌉 Getxo</button>
       <button class="city-tab" onclick="showCity('bermeo',this)">⚓ Bermeo & Mundaka</button>
       <button class="city-tab" onclick="showCity('lekeitio',this)">🏝️ Lekeitio</button>
-      <button class="city-tab" onclick="showCity('sansebastian',this)">🍢 San Sebastián</button>
+      <button class="city-tab" onclick="showCity('sanse',this)">🍢 San Sebastián</button>
       <button class="city-tab" onclick="showCity('getaria',this)">🐟 Getaria & Zumaia</button>
     </div>
 
-    <!-- BILBAO -->
     <div class="city-panel active" id="city-bilbao">
-      <div class="city-intro">Bilbao è la vostra base per 7 notti. Per i pintxos il Casco Viejo è insostituibile; per le cene con più respiro l'Ensanche è il quartiere giusto. Prezzi generalmente onesti — solo i posti più noti vicino al Guggenheim salgono un po'.</div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">El Globo</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Pintxos bar</span><span class="resto-badge badge-best">⭐ Top Bilbao</span></div>
-        </div>
-        <div class="resto-address">📍 Calle Diputación 8, Ensanche · Metro Moyua</div>
-        <div class="resto-desc">Uno dei banconi di pintxos più completi di Bilbao. Imperdibile il txangurro gratinato (granchio), considerato tra i migliori della città. Atmosfera calda, legno scuro, bancone sempre pieno. Chiuso la domenica.</div>
-        <div class="resto-specials"><span class="resto-special">🦀 Txangurro gratinato</span><span class="resto-special">🥄 Salmone marinato</span><span class="resto-special">🐟 Tonno grigliato</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=El+Globo+Bilbao+Calle+Diputacion+8" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Gure Toki</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Pintxos creativi</span></div>
-        </div>
-        <div class="resto-address">📍 Plaza Nueva 12, Casco Viejo</div>
-        <div class="resto-desc">Cucina basca contemporanea affacciata sulla Plaza Nueva. Ingredienti dal Mercado de la Ribera. Famoso per il tempura di granchio e il baccalà salato. Stile industriale elegante. Ottimo rapporto qualità-prezzo.</div>
-        <div class="resto-specials"><span class="resto-special">🦀 Tempura di granchio</span><span class="resto-special">🧀 Capra in manzanilla</span><span class="resto-special">🐟 Bacalao salado</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Gure+Toki+Plaza+Nueva+Bilbao" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Víctor Montes</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€-€€€</span><span class="resto-badge badge-type">Ristorante storico</span></div>
-        </div>
-        <div class="resto-address">📍 Plaza Nueva 8, Casco Viejo</div>
-        <div class="resto-desc">Locale storico e raffinato sulla Plaza Nueva — il più elegante della piazza. Da oltre un secolo serve cucina basca a locali e visitatori. Al bancone pintxos di alta qualità; al tavolo piatti più strutturati. Ambiente unico, da non perdere per una cena.</div>
-        <div class="resto-specials"><span class="resto-special">🍢 Pintxos premium</span><span class="resto-special">🐟 Pesce del giorno</span><span class="resto-special">🥩 Carne alla griglia</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Victor+Montes+Plaza+Nueva+Bilbao" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Los Fueros</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Cucina basca</span><span class="resto-badge badge-star">Bib Gourmand Michelin</span></div>
-        </div>
-        <div class="resto-address">📍 Calle de los Fueros 6, Casco Viejo</div>
-        <div class="resto-desc">Riconoscimento Michelin Bib Gourmand — il miglior rapporto qualità-prezzo. Aperto nel 1878, rinnovato con intelligenza. Bistrot storico nel quartiere antico. Due menu degustazione più una ricca carta. I gamberi alla griglia sono leggendari. Prenotazione consigliata.</div>
-        <div class="resto-specials"><span class="resto-special">🍤 Gamberi alla griglia</span><span class="resto-special">🥘 Piatti tipici bilbaíni</span></div>
-        <div class="resto-note">⭐ Riconoscimento Michelin Bib Gourmand — prenotare!</div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Los+Fueros+Calle+de+los+Fueros+6+Bilbao" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">La Viña del Ensanche</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Jamon & pintxos</span></div>
-        </div>
-        <div class="resto-address">📍 Calle Diputación 10, Ensanche</div>
-        <div class="resto-desc">Il tempio del jamón iberico Joselito a Bilbao. Aperto dal 1927, arredi originali in legno. Bancone con pintxos classici, tavoli per cena. Menu degustazione 7 portate. Bruschetta con jamon Joselito imperdibile. Anche negozio di prodotti locali in loco.</div>
-        <div class="resto-specials"><span class="resto-special">🥩 Jamón Joselito ibérico</span><span class="resto-special">🥖 Bruschetta pomodoro</span><span class="resto-special">🍷 Vini locali</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=La+Vina+del+Ensanche+Calle+Diputacion+10+Bilbao" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Bar Berton</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Pintxos tradizionali</span></div>
-        </div>
-        <div class="resto-address">📍 Jardines 11, Casco Viejo</div>
-        <div class="resto-desc">Pintxos di altissima qualità nel Casco Viejo. Conserveria di pesce vivo per garantire massima freschezza. Forno a carbone di quercia per carni e pesci. Atmosfera curata senza perdere il tocco tradizionale. Ottimo per il pranzo durante il free tour.</div>
-        <div class="resto-specials"><span class="resto-special">🥩 Solomillo</span><span class="resto-special">🥚 Txapela con uova di quaglia</span><span class="resto-special">🐟 Pesce fresco del giorno</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Bar+Berton+Jardines+11+Bilbao" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Café Iruña</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Storico · Dal 1903</span></div>
-        </div>
-        <div class="resto-address">📍 Jardines de Albia 3, Ensanche</div>
-        <div class="resto-desc">Locale storico aperto nel 1903, vicino al Guggenheim. Architettura mudéjar con azulejos, legni intagliati e soffitti alti. Ottimo per aperitivo o cena in atmosfera d'epoca. Pintxos classici e cucina basca tradizionale. Meta obbligatoria anche solo per l'ambiente.</div>
-        <div class="resto-specials"><span class="resto-special">🏛️ Architettura storica</span><span class="resto-special">🍢 Pintxos classici</span><span class="resto-special">🍷 Aperitivo con vista piazza</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Cafe+Iruña+Jardines+de+Albia+3+Bilbao" target="_blank">📍 Apri in Maps</a>
-      </div>
+      <div class="city-intro">Bilbao è la vostra base per 7 notti. Per i pintxos il Casco Viejo è insostituibile; per le cene con più respiro l'Ensanche è il quartiere giusto.</div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">El Globo</div><div class="rc-badges"><span class="rb rb-type">Pintxos bar</span><span class="rb rb-best">⭐ Top Bilbao</span></div></div><div class="rc-addr">📍 Calle Diputación 8, Ensanche · Metro Moyua</div><div class="rc-desc">Uno dei banconi di pintxos più completi di Bilbao. Imperdibile il txangurro gratinato (granchio). Atmosfera calda con legno scuro. Chiuso la domenica.</div><div class="rc-specs"><span class="rc-spec">🦀 Txangurro gratinato</span><span class="rc-spec">🐟 Tonno grigliato</span><span class="rc-spec">🥄 Salmone marinato</span></div><a class="maps-btn" href="https://maps.google.com/?q=El+Globo+Bilbao+Calle+Diputacion+8" target="_blank">📍 Maps</a></div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">Gure Toki</div><div class="rc-badges"><span class="rb rb-type">Pintxos creativi</span></div></div><div class="rc-addr">📍 Plaza Nueva 12, Casco Viejo</div><div class="rc-desc">Cucina basca contemporanea affacciata sulla Plaza Nueva. Ingredienti dal Mercado de la Ribera. Stile industriale elegante. Ottimo rapporto qualità-prezzo.</div><div class="rc-specs"><span class="rc-spec">🦀 Tempura di granchio</span><span class="rc-spec">🐟 Bacalao salado</span></div><a class="maps-btn" href="https://maps.google.com/?q=Gure+Toki+Plaza+Nueva+Bilbao" target="_blank">📍 Maps</a></div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">Los Fueros</div><div class="rc-badges"><span class="rb rb-type">Cucina basca</span><span class="rb rb-star">Bib Gourmand Michelin</span></div></div><div class="rc-addr">📍 Calle de los Fueros 6, Casco Viejo</div><div class="rc-desc">Aperto nel 1878, rinnovato con intelligenza. Bistrot storico nel quartiere antico. Bib Gourmand Michelin — il miglior rapporto qualità-prezzo. I gamberi alla griglia sono leggendari. Prenotazione consigliata.</div><div class="rc-specs"><span class="rc-spec">🍤 Gamberi alla griglia</span><span class="rc-spec">🥘 Piatti tipici bilbaíni</span></div><div class="rc-note">⭐ Bib Gourmand Michelin</div><a class="maps-btn" href="https://maps.google.com/?q=Los+Fueros+Calle+de+los+Fueros+6+Bilbao" target="_blank">📍 Maps</a></div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">Víctor Montes</div><div class="rc-badges"><span class="rb rb-type">Storico · Dal 1800s</span></div></div><div class="rc-addr">📍 Plaza Nueva 8, Casco Viejo</div><div class="rc-desc">Locale storico e raffinato sulla Plaza Nueva. Da oltre un secolo serve cucina basca. Al bancone pintxos di alta qualità; al tavolo piatti più strutturati. Ambiente unico.</div><div class="rc-specs"><span class="rc-spec">🍢 Pintxos premium</span><span class="rc-spec">🐟 Pesce del giorno</span></div><a class="maps-btn" href="https://maps.google.com/?q=Victor+Montes+Plaza+Nueva+Bilbao" target="_blank">📍 Maps</a></div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">La Viña del Ensanche</div><div class="rc-badges"><span class="rb rb-type">Jamón & pintxos · Dal 1927</span></div></div><div class="rc-addr">📍 Calle Diputación 10, Ensanche</div><div class="rc-desc">Il tempio del jamón iberico Joselito a Bilbao. Arredi originali in legno dal 1927. Bancone con pintxos classici, tavoli per cena. Menu degustazione 7 portate.</div><div class="rc-specs"><span class="rc-spec">🥩 Jamón Joselito ibérico</span><span class="rc-spec">🥖 Bruschetta pomodoro</span></div><a class="maps-btn" href="https://maps.google.com/?q=La+Vina+del+Ensanche+Bilbao+Calle+Diputacion+10" target="_blank">📍 Maps</a></div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">Café Iruña</div><div class="rc-badges"><span class="rb rb-type">Storico · Dal 1903</span></div></div><div class="rc-addr">📍 Jardines de Albia 3, Ensanche</div><div class="rc-desc">Aperto nel 1903. Architettura mudéjar con azulejos e soffitti alti — si respira storia. Vicino al Guggenheim. Ottimo per aperitivo o cena d'atmosfera.</div><div class="rc-specs"><span class="rc-spec">🏛️ Architettura storica</span><span class="rc-spec">🍢 Pintxos classici</span></div><a class="maps-btn" href="https://maps.google.com/?q=Cafe+Iruña+Jardines+de+Albia+3+Bilbao" target="_blank">📍 Maps</a></div>
     </div>
 
-    <!-- GETXO -->
     <div class="city-panel" id="city-getxo">
-      <div class="city-intro">Getxo è a 20 minuti da Bilbao. Il giorno del compleanno di Silvia (19 giugno) pranzo qui dopo la visita al Ponte di Vizcaya, poi cena speciale a Bilbao. I ristoranti sul lungomare di Las Arenas sono ideali per un pranzo con vista.</div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Arrantzale</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€€</span><span class="resto-badge badge-type">Pesce e griglia</span></div>
-        </div>
-        <div class="resto-address">📍 Muelle de Arriluze s/n, Puerto Viejo de Algorta, Getxo</div>
-        <div class="resto-desc">Sul porto vecchio di Algorta (Getxo), con vista sui pescherecci. Specialità di pesce fresco della Biscaglia alla griglia. Ambiente marinaro autentico, lontano dal turismo di massa. Perfetto per il pranzo di compleanno.</div>
-        <div class="resto-specials"><span class="resto-special">🐟 Pesce alla griglia</span><span class="resto-special">🦞 Aragosta</span><span class="resto-special">🍷 Txakoli fresco</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Arrantzale+Puerto+Viejo+Algorta+Getxo" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Tamarises Izarra</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€€</span><span class="resto-badge badge-type">Cucina basca moderna</span></div>
-        </div>
-        <div class="resto-address">📍 Avenida de Algorta 10, Getxo</div>
-        <div class="resto-desc">Ristorante con terrazza vista mare. Cucina basca creativa con prodotti locali. Molto apprezzato per pranzi in famiglia o gruppi. Ottima selezione di vini baschi. Ideale per una cena speciale di compleanno se volete restare a Getxo invece di rientrare a Bilbao.</div>
-        <div class="resto-specials"><span class="resto-special">🥂 Ottimo per compleanni</span><span class="resto-special">🐟 Pesce atlantico</span><span class="resto-special">🌅 Vista mare</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Tamarises+Izarra+Getxo" target="_blank">📍 Apri in Maps</a>
-      </div>
+      <div class="city-intro">Il 19 giugno, giorno del compleanno di Silvia. Pranzo a Getxo dopo il Ponte di Vizcaya, poi cena speciale a Bilbao.</div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">Arrantzale</div><div class="rc-badges"><span class="rb rb-type">Pesce sul porto</span></div></div><div class="rc-addr">📍 Muelle de Arriluze s/n, Puerto Viejo de Algorta, Getxo</div><div class="rc-desc">Sul porto vecchio di Algorta con vista sui pescherecci. Pesce fresco della Biscaglia alla griglia. Atmosfera marinara autentica, lontano dal turismo.</div><div class="rc-specs"><span class="rc-spec">🐟 Pesce alla griglia</span><span class="rc-spec">🍷 Txakoli fresco</span></div><a class="maps-btn" href="https://maps.google.com/?q=Arrantzale+Puerto+Viejo+Algorta+Getxo" target="_blank">📍 Maps</a></div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">Tamarises Izarra</div><div class="rc-badges"><span class="rb rb-type">Cucina basca moderna</span></div></div><div class="rc-addr">📍 Avenida de Algorta 10, Getxo</div><div class="rc-desc">Terrazza vista mare. Cucina basca creativa con prodotti locali. Molto apprezzato per pranzi in famiglia. Ottima selezione di vini baschi.</div><div class="rc-specs"><span class="rc-spec">🥂 Ottimo per compleanni</span><span class="rc-spec">🌅 Vista mare</span></div><a class="maps-btn" href="https://maps.google.com/?q=Tamarises+Izarra+Getxo" target="_blank">📍 Maps</a></div>
     </div>
 
-    <!-- BERMEO & MUNDAKA -->
     <div class="city-panel" id="city-bermeo">
-      <div class="city-intro">Il 20 giugno girate tra Urdaibai, Bermeo e Mundaka. Pranzo a Bermeo sul porto è praticamente obbligatorio: pesce freschissimo dell'asta mattutina. A Mundaka l'atmosfera è più da birra e pintxos sul lungomare.</div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Jokin</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€-€€€</span><span class="resto-badge badge-type">Pesce sul porto</span><span class="resto-badge badge-best">Top Bermeo</span></div>
-        </div>
-        <div class="resto-address">📍 Eupeme Deuna 13 (Lonja), Porto di Bermeo</div>
-        <div class="resto-desc">Direttamente sul porto di Bermeo, sopra la lonja (asta del pesce). Vista panoramica sul porto e sul Casco Viejo. Uno dei migliori ristoranti di pesce della costa basca. Menù del giorno ~15€, carta più ampia la sera. Servizio attento, cucina marinara di prima qualità.</div>
-        <div class="resto-specials"><span class="resto-special">🐟 Pesce fresco dell'asta</span><span class="resto-special">🦐 Frutti di mare</span><span class="resto-special">🌊 Vista porto</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Restaurante+Jokin+Bermeo+puerto" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Portuondo</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€€</span><span class="resto-badge badge-type">Griglia · Pesce e carne</span><span class="resto-badge badge-star">Michelin Selected</span></div>
-        </div>
-        <div class="resto-address">📍 Barrio Portuondo s/n, Mundaka</div>
-        <div class="resto-desc">Nella frazione di Portuondo tra Bermeo e Mundaka, con terrazza panoramica sull'estuario di Urdaibai. Segnalato dalla guida Michelin. Pesce fresco delle aste di Bermeo e Mundaka alla griglia. La txuleta (costata basca) è eccezionale. Aperto tutti i giorni.</div>
-        <div class="resto-specials"><span class="resto-special">🥩 Txuleta alla griglia</span><span class="resto-special">🐟 Pesce alle aste locali</span><span class="resto-special">🌿 Vista estuario Urdaibai</span></div>
-        <div class="resto-note">⭐ Michelin Selected — prenotare in estate</div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Portuondo+Mundaka+Urdaibai" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Baserri Maitea</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Cucina basca rurale</span></div>
-        </div>
-        <div class="resto-address">📍 Barrio Forua, Urdaibai (vicino alla Riserva)</div>
-        <div class="resto-desc">Casolare basco nella riserva di Urdaibai. Cucina tradizionale dell'entroterra: marmitako (stufato di pesce), verdure di stagione, formaggi locali. Ottimo per una sosta durante la visita a Urdaibai. Atmosfera autentica e prezzi onesti.</div>
-        <div class="resto-specials"><span class="resto-special">🥘 Marmitako</span><span class="resto-special">🫑 Verdure di stagione</span><span class="resto-special">🧀 Formaggi locali (per chi li ama!)</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Baserri+Maitea+Urdaibai+Forua" target="_blank">📍 Apri in Maps</a>
-      </div>
-    </div>
-
-    <!-- LEKEITIO -->
-    <div class="city-panel" id="city-lekeitio">
-      <div class="city-intro">Il 21 giugno, dopo Gaztelugatxe e la visita all'Isla San Nicolás. Lekeitio ha un porto coloratissimo circondato di ristoranti — tutto fresco, tutto buono. Prezzi onesti per la qualità che offrono.</div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Asador Prim</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€-€€€</span><span class="resto-badge badge-type">Grigliata di pesce e carne</span></div>
-        </div>
-        <div class="resto-address">📍 Centro di Lekeitio (vicino al porto)</div>
-        <div class="resto-desc">Asador (griglieria) specializzato in pesce e carne alla brace. Cucina tradizionale basca con prodotti locali di stagione. Ottimo per gruppi e famiglie. Posizione privilegiata sulla costa. Tra i più consigliati della zona da chi ci vive.</div>
-        <div class="resto-specials"><span class="resto-special">🔥 Pesce alla brace</span><span class="resto-special">🥩 Carne alla griglia</span><span class="resto-special">🌊 Cucina marinara locale</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Asador+Prim+Lekeitio" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Ristoranti sul porto di Lekeitio</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Porto pescatori</span></div>
-        </div>
-        <div class="resto-address">📍 Lungoporte di Lekeitio</div>
-        <div class="resto-desc">Il porto di Lekeitio è circondato da una fila di barettini e ristoranti tutti con pesce freschissimo. Non c'è una scelta sbagliata: chiedete cosa c'è di fresco quel giorno ("¿qué hay fresco hoy?") e ordinate quello. Menù del giorno ~12–15€ con primo, secondo e bevanda inclusa.</div>
-        <div class="resto-specials"><span class="resto-special">🐟 Pesce del giorno</span><span class="resto-special">🍺 Zurito (piccola birra basca)</span><span class="resto-special">💶 Menù ~12–15€</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=porto+Lekeitio+ristoranti" target="_blank">📍 Apri in Maps</a>
-      </div>
-    </div>
-
-    <!-- SAN SEBASTIAN -->
-    <div class="city-panel" id="city-sansebastian">
-      <div class="city-intro">San Sebastián ha la più alta concentrazione di stelle Michelin al mondo per abitante. Ma la vera esperienza basca è l'ir de pintxos nella Parte Vieja: di bar in bar, 2–3 pintxos a testa con un txakoli. Fate così: entrate, guardate il bancone, chiedete i caldi appena fatti (los calientes), pagate e uscite. Poi il prossimo.</div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Ganbara</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€-€€€</span><span class="resto-badge badge-type">Pintxos storici</span><span class="resto-badge badge-best">Top Parte Vieja</span></div>
-        </div>
-        <div class="resto-address">📍 Calle de San Jerónimo 21, Parte Vieja</div>
-        <div class="resto-desc">Storico della Parte Vieja da oltre 25 anni, già citato dalla guida Michelin. Prosciutti iberici appesi alle pareti, bancone pintxos decorati artisticamente. Crocchetta di gallina leggendaria. Anche ristorante al piano inferiore (prenotare). Txakoli ottimo. Due visite in due giorni: normale.</div>
-        <div class="resto-specials"><span class="resto-special">🍗 Crocchetta di gallina</span><span class="resto-special">🥐 Chistorra in pasta sfoglia</span><span class="resto-special">🌿 Asparagi in pastella</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Ganbara+Calle+San+Jeronimo+21+San+Sebastian" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Atari</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Pintxos vivaci</span></div>
-        </div>
-        <div class="resto-address">📍 Calle Mayor 18, Parte Vieja</div>
-        <div class="resto-desc">Vivace e spensierato, ideale per un'allegra serata in gruppo. Musica, atmosfera giovanile, pubblico eterogeneo. Prezzi democratici: 2,50–5€ a pintxo. Ottimi i vegetariani (cozze e carciofi, uovo a bassa temperatura). Crocchette di baccalà imperdibili.</div>
-        <div class="resto-specials"><span class="resto-special">🥚 Uovo bassa temp. con verdure</span><span class="resto-special">🐟 Crocchette baccalà</span><span class="resto-special">🫙 Cozze e carciofi</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Atari+Calle+Mayor+18+San+Sebastian" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Sirimiri</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Pintxos + cocktail</span></div>
-        </div>
-        <div class="resto-address">📍 Parte Vieja (di fronte ad Atari)</div>
-        <div class="resto-desc">Di fronte ad Atari, ideale come secondo stop nel giro pintxos. Cocktail ben preparati, pintxos creativi. Atmosfera moderna nella Parte Vieja. Ottimo per chiudere il giro serale con qualcosa di più mixologico.</div>
-        <div class="resto-specials"><span class="resto-special">🍹 Cocktail artigianali</span><span class="resto-special">🍢 Pintxos creativi</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Sirimiri+Parte+Vieja+San+Sebastian" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Zeruko</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€€</span><span class="resto-badge badge-type">Pesce creativo</span></div>
-        </div>
-        <div class="resto-address">📍 Calle Pescadería 10, Parte Vieja</div>
-        <div class="resto-desc">Aperto nel 1982, uno degli indirizzi di tendenza della Parte Vieja. Il protagonista è il pesce freschissimo in versione creativa. Birre artigianali locali. Pintxos 5–8€ (più cari degli altri, ma qualità superiore). Ottimo anche per Enrica — pesce sì, formaggi no.</div>
-        <div class="resto-specials"><span class="resto-special">🐟 Pesce fresco creativo</span><span class="resto-special">🍄 Funghi shitake con udon</span><span class="resto-special">🍺 Birre artigianali</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Zeruko+Calle+Pescaderia+10+San+Sebastian" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Bergara Bar</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Pintxos premiati</span><span class="resto-badge badge-best">Premio nazionale pintxos</span></div>
-        </div>
-        <div class="resto-address">📍 Calle General Artetxe 8, Quartiere Gros</div>
-        <div class="resto-desc">Nel vivace quartiere Gros, leggermente fuori dalla Parte Vieja ma vale lo spostamento. Ha vinto premi nazionali per i pintxos. Famoso per La Txalupa: barchetta di funghi e gamberetti con crema e formaggio gratinato. Capasanta gratinata e baccalà all'aglio eccellenti.</div>
-        <div class="resto-specials"><span class="resto-special">⛵ La Txalupa (funghi e gamberetti)</span><span class="resto-special">🥊 Capasanta gratinata</span><span class="resto-special">🐟 Baccalà all'aglio</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Bergara+Bar+Calle+General+Artetxe+8+San+Sebastian" target="_blank">📍 Apri in Maps</a>
-      </div>
-    </div>
-
-    <!-- GETARIA & ZUMAIA -->
-    <div class="city-panel" id="city-getaria">
-      <div class="city-intro">Il 23 giugno, ultima gita. Pranzo a Getaria — uno dei borghi del pesce più famosi di tutto il Paese Basco. I ristoranti qui sono rinomati in tutta la Spagna per la qualità della griglia. Elkano ha una stella Michelin, ma ci sono ottime alternative per tutti i budget.</div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Iribar Jatetxea</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€-€€€</span><span class="resto-badge badge-type">Pesce e carne alla griglia</span><span class="resto-badge badge-best">Top consigliato</span></div>
-        </div>
-        <div class="resto-address">📍 Kale Nagusia 34, Getaria</div>
-        <div class="resto-desc">Il migliore rapporto qualità-prezzo di Getaria secondo i recensori. Branzino e costata condivisi sono stati "facilmente il miglior pasto della vacanza nei Paesi Baschi" secondo molti visitatori. Si riempie in fretta — arrivate presto o prenotate. Perfetto per un gruppo di 6.</div>
-        <div class="resto-specials"><span class="resto-special">🐟 Branzino alla griglia</span><span class="resto-special">🥩 Rib-eye basco</span><span class="resto-special">🍷 Txakoli locale</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Iribar+Jatetxea+Kale+Nagusia+34+Getaria" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Kaia Kaipe</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€€€</span><span class="resto-badge badge-type">Griglia premium</span></div>
-        </div>
-        <div class="resto-address">📍 Kaia Kalea s/n, Porto di Getaria</div>
-        <div class="resto-desc">Sul porto, sala con pannelli in legno a forma di cabina navale, terrazza con vista. Griglia esterna a vista — uno spettacolo. Rombo e branzino alla griglia sono il piatto signature. Prezzi alti ma qualità altissima. Se volete spendere di più una sera, questa è la scelta giusta.</div>
-        <div class="resto-specials"><span class="resto-special">🐠 Rombo alla griglia (rodaballo)</span><span class="resto-special">🦞 Aragosta</span><span class="resto-special">🍷 Txakoli premium</span></div>
-        <div class="resto-note">💸 Conto medio: 50–70€ a testa — solo se avete budget extra</div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Kaia+Kaipe+Getaria+porto" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Politena</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€-€€€</span><span class="resto-badge badge-type">Pesce e griglia</span></div>
-        </div>
-        <div class="resto-address">📍 Getaria centro</div>
-        <div class="resto-desc">Ottimo compromesso tra qualità e prezzo a Getaria. Pesce fresco alla griglia in versione più accessibile rispetto a Elkano e Kaia. Molto apprezzato dai locali. Semplice e buono — la filosofia giusta per un pranzo in un borgo di pescatori.</div>
-        <div class="resto-specials"><span class="resto-special">🐟 Griglia di pesce</span><span class="resto-special">🍢 Pintxos al bancone</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=Politena+Getaria" target="_blank">📍 Apri in Maps</a>
-      </div>
-
-      <div class="resto-card">
-        <div class="resto-header">
-          <div class="resto-name">Bar e ristoranti di Zumaia</div>
-          <div class="resto-badges"><span class="resto-badge badge-price">€€</span><span class="resto-badge badge-type">Spiaggia e flysch</span></div>
-        </div>
-        <div class="resto-address">📍 Lungo la spiaggia di Itzurun, Zumaia</div>
-        <div class="resto-desc">Dopo la visita al flysch, i bar sulla spiaggia di Itzurun servono pintxos, birra e menù del giorno a prezzi molto onesti. Atmosfera balneare rilassata. Ideale per uno spuntino prima di spostarsi a Getaria per il pranzo principale.</div>
-        <div class="resto-specials"><span class="resto-special">🍢 Pintxos da spiaggia</span><span class="resto-special">🍺 Birra atlantica</span><span class="resto-special">💶 Prezzi da 8–12€</span></div>
-        <a class="maps-btn" href="https://maps.google.com/?q=spiaggia+Itzurun+Zumaia+bar" target="_blank">📍 Apri in Maps</a>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-</main>
-
-<script>
-  function showPage(id, btn) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    if (btn) btn.classList.add('active');
-    window.scrollTo(0, 0);
-  }
-  function showDay(n, btn) {
-    document.querySelectorAll('.day-card').forEach(d => d.classList.remove('active'));
-    document.querySelectorAll('.day-pill').forEach(p => p.classList.remove('active'));
-    document.getElementById('day-' + n).classList.add('active');
-    if (btn) btn.classList.add('active');
-  }
-  function showCity(id, btn) {
-    document.querySelectorAll('.city-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.city-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('city-' + id).classList.add('active');
-    if (btn) btn.classList.add('active');
-  }
-</script>
-</body>
-</html>
+      <div class="city-intro">Il 20 giugno tra Urdaibai, Bermeo e Mundaka. Pranzo a Bermeo sul porto è praticamente obbligatorio.</div>
+      <div class="rc"><div class="rc-hdr"><div class="rc-name">Jokin</div><div class="rc-badges"><span class="rb rb-type">Pesce sul porto</span><span class="rb rb-best">Top Bermeo</span></div></div><div class="rc-addr">📍 Eupeme Deuna 13 (Lonja), Porto di Bermeo</div><div class="rc-desc">Direttamente sul porto, sopra la lonja (asta del pesce). Vista panoramica sul porto e sul Casco Viejo. Uno dei migliori ristoranti di pesce della costa basca.</div><div class="rc-specs"><span class="rc-spec">🐟 Pesce fresco dell'asta</span><span class="rc-spec">🌊 Vi
